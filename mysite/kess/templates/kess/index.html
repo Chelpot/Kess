@@ -1,0 +1,9 @@
+{% if latest_kess_list %}
+    <ul>
+    {% for kess in latest_kess_list %}
+        <li><a href="{% url 'kess:detail' kess.id %}">{{ kess.emoji }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No kess are available.</p>
+{% endif %}
