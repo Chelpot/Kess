@@ -1,1 +1,22 @@
-<h1>{{ kess.emoji }}</h1>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
+
+<div class="center_container">
+    <form action="" method="get" class="form-example">
+        <div class="form-kess">
+            <label for="title"><h1>Voici le Kess: </h1></label>
+            <h1>{{ kess.emoji }}</h1>
+        </div>
+        <div class="form-kess">
+            <label for="answer">Entrez votre proposition: </label>
+            <input type="answer" name="answer" id="answer" required>
+        </div>
+        <div class="form-kess">
+            <input type="submit" value="Proposer!">
+        </div>
+
+
+        <span>Réponse pour les tests : {{kess.reponse}}</span>
+    </form>
+</div>

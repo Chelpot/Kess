@@ -1,0 +1,19 @@
+li a {
+    color: green;
+    background-color: #ffaa68;
+
+}
+
+body {
+    background-color: #CEE5D0;
+}
+
+.center_container{
+    height: 200px;
+    width: 340px;
+    background-color: #F3F0D7;
+    border-radius: 1em;
+    margin: 5em auto;
+    padding: 4em;
+    text-align: center;
+}
