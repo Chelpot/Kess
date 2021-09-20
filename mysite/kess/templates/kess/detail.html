@@ -1,22 +1,28 @@
 {% load static %}
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
-<div class="center_container">
-    <form action="" method="get" class="form-example">
-        <div class="form-kess">
-            <label for="title"><h1>Voici le Kess: </h1></label>
-            <h1>{{ kess.emoji }}</h1>
-        </div>
-        <div class="form-kess">
-            <label for="answer">Entrez votre proposition: </label>
-            <input type="answer" name="answer" id="answer" required>
-        </div>
-        <div class="form-kess">
-            <input type="submit" value="Proposer!">
-        </div>
+<div class="container">
+    <h1 class="title_detail">Voici le Kess: </h1>
+    <h1 class="kess_img">{{ kess.emoji }}</h1>
 
-
-        <span>Réponse pour les tests : {{kess.reponse}}</span>
+    <form action="" method="get" class="">
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="col-form-label" for="answer">Entrez votre proposition: </label>
+            <input class="form-control col-lg-5" type="answer" name="answer" id="answer" required>
+        </div>
+        <div class="form-group">
+            <input class="btn btn-lg btn-dark" type="submit" value="Essayer la proposition">
+        </div>
     </form>
+    {% if is_answer_valide %}
+    <div class="detail_answer">
+        <h1>Bravo ! La réponse était effectivement :</h1>
+        <h1>"{{kess.reponse}}"</h1>
+    </div>
+    {% endif %}
+    <span>Réponse pour les tests : {{kess.reponse}}</span>
+    <p class="detail-publication-date">Kess publié le : {{ kess.date }}</p>
 </div>

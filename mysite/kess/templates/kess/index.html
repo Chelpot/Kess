@@ -5,7 +5,9 @@
 {% if latest_kess_list %}
     <ul>
     {% for kess in latest_kess_list %}
-        <li><a href="{% url 'kess:detail' kess.id %}">{{ kess.emoji }}</a></li>
+        <li><h1>
+            <a href="{% url 'kess:detail' kess.id %}">{{ kess.emoji }}</a>
+        </h1></li>
     {% endfor %}
     </ul>
 {% else %}

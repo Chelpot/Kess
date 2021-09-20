@@ -11,5 +11,16 @@ def index(request):
 
 def detail(request, kess_id):
     kess = get_object_or_404(Kess, pk=kess_id)
-    return render(request, 'kess/detail.html', {'kess': kess})
+
+    #TODO: Make it with POST instead, build a form and try to customise it's css
+    if request.method == 'GET':
+        if request.GET.get('answer') == kess.reponse:
+            answer_state=True
+        else:
+            answer_state=False
+
+
+
+
+    return render(request, 'kess/detail.html', {'kess': kess, 'is_answer_valide': answer_state})
 

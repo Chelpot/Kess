@@ -2,4 +2,8 @@ from django.contrib import admin
 
 from .models import Kess
 
-admin.site.register(Kess)
+
+class KessAdmin(admin.ModelAdmin):
+    fields = ['date', 'emoji', 'reponse']
+    list_display = ('reponse', 'emoji', 'date')
+admin.site.register(Kess, KessAdmin)

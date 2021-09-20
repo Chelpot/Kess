@@ -1,19 +1,40 @@
-li a {
-    color: green;
-    background-color: #ffaa68;
-
-}
 
 body {
-    background-color: #CEE5D0;
-}
-
-.center_container{
-    height: 200px;
-    width: 340px;
-    background-color: #F3F0D7;
-    border-radius: 1em;
-    margin: 5em auto;
-    padding: 4em;
+    background-color: #F7D59C;
+    color: #F3F0D7;
     text-align: center;
 }
+.container{
+    position: static;
+    height: auto;
+    width: auto;
+    background-color: #5E454B;
+    border-radius: 1em;
+    margin: 5em auto 1em;
+    padding: 4em 4em 1em;
+    text-align: left;
+}
+ /* Detail kess */
+.title_detail{
+    margin-bottom: 1em;
+}
+
+.kess_img{
+    margin: 1em 0;
+}
+
+.detail-publication-date{
+font-size: 10;
+margin-top: 6em;
+}
+
+.detail_answer{
+padding: 2em 0;
+}
+
+/*
+F7D59C
+F3F0D7
+5E454B
+CEE5D0
+*/
