@@ -11,6 +11,12 @@ def index(request):
 
 def detail(request, kess_id):
     kess = get_object_or_404(Kess, pk=kess_id)
+    kess_hint = ''
+    for letter in kess.reponse:
+        if ' ' in letter:
+            kess_hint += ' '
+        else:
+            kess_hint += '-'
 
     #TODO: Make it with POST instead, build a form and try to customise it's css
     if request.method == 'GET':
@@ -22,5 +28,8 @@ def detail(request, kess_id):
 
 
 
-    return render(request, 'kess/detail.html', {'kess': kess, 'is_answer_valide': answer_state})
+    return render(request, 'kess/detail.html', {'kess': kess,
+                                                'is_answer_valide': answer_state,
+                                                'kess_hint': kess_hint
+                                                })
 
