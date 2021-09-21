@@ -32,6 +32,15 @@ margin-top: 6em;
 padding: 2em 0;
 }
 
+.userNavbar{
+    margin-right: 0px!important;
+}
+
+.removeHyperlinkStyling{
+  color: inherit;
+  text-decoration: inherit;
+}
+
 /*
 F7D59C
 F3F0D7

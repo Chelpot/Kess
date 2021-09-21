@@ -11,22 +11,29 @@
     <h1 class="kess_img">{{ kess.emoji }}</h1>
     <h3>{{kess_hint}}</h3>
 
-    <form action="" method="get" class="">
-        {% csrf_token %}
-        <div class="form-group">
-            <label class="col-form-label" for="answer">Entrez votre proposition: </label>
-            <input class="form-control col-lg-5" type="answer" name="answer" id="answer" required>
+    {% if user.is_authenticated %}
+        <form action="" method="get" class="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="col-form-label" for="answer">Entrez votre proposition: </label>
+                <input class="form-control col-lg-5" type="answer" name="answer" id="answer" required>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-lg btn-dark" type="submit" value="Essayer la proposition">
+            </div>
+        </form>
+        {% if is_answer_valide %}
+        <div class="detail_answer">
+            <h1>Bravo ! La réponse était effectivement :</h1>
+            <h1>"{{kess.reponse}}"</h1>
         </div>
-        <div class="form-group">
-            <input class="btn btn-lg btn-dark" type="submit" value="Essayer la proposition">
-        </div>
-    </form>
-    {% if is_answer_valide %}
-    <div class="detail_answer">
-        <h1>Bravo ! La réponse était effectivement :</h1>
-        <h1>"{{kess.reponse}}"</h1>
-    </div>
+        {% endif %}
+        <span>Réponse pour les tests : {{kess.reponse}}</span>
+    {% else %}
+        <br>
+        <span>⚠️ Vous devez être connecté pour proposer une réponse</span>
+        <br>
+        <a class="removeHyperlinkStyling" href="{% url 'login'%}?next={{request.path}}">Se connecter ?</a>
     {% endif %}
-    <span>Réponse pour les tests : {{kess.reponse}}</span>
     <p class="detail-publication-date">Kess publié le : {{ kess.date }}</p>
 </div>

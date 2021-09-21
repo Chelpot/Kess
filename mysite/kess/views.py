@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
+
 from .models import Kess
 
 
@@ -25,11 +26,7 @@ def detail(request, kess_id):
         else:
             answer_state=False
 
-
-
-
     return render(request, 'kess/detail.html', {'kess': kess,
                                                 'is_answer_valide': answer_state,
                                                 'kess_hint': kess_hint
                                                 })
-
