@@ -1,3 +1,8 @@
+{% include "kess/header.html" %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
+
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
