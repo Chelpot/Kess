@@ -4,6 +4,6 @@ from .models import Kess
 
 
 class KessAdmin(admin.ModelAdmin):
-    fields = ['date', 'emoji', 'reponse', 'isStaff', 'category']
-    list_display = ('reponse', 'emoji', 'date', 'category')
+    fields = [ 'created_at', 'published_at', 'emoji', 'reponse', 'category', 'is_staff', 'is_ready_to_publish']
+    list_display = ('reponse', 'emoji', 'created_at', 'category')
 admin.site.register(Kess, KessAdmin)
