@@ -21,7 +21,7 @@ def detail(request, kess_id):
     kess_hint = ''
 
     # Only display hint for current kess when it's been 3 days since publication date
-    if datetime.now(timezone.utc) > kess.published_at + timedelta(days = 3):
+    if datetime.now(timezone.utc) > kess.published_at + timedelta(days=3):
         for letter in kess.reponse:
             if ' ' in letter:
                 kess_hint += ' '
@@ -32,9 +32,9 @@ def detail(request, kess_id):
     # TODO: Make it with POST instead, build a form and try to customise it's css
     if request.method == 'GET':
         if request.GET.get('answer') == kess.reponse:
-            answer_state=True
+            answer_state = True
         else:
-            answer_state=False
+            answer_state = False
 
     return render(request, 'kess/detail.html', {'kess': kess,
                                                 'is_answer_valide': answer_state,
@@ -56,6 +56,10 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(email=email, password=raw_password)
             login(request, user, backend='kess.auth.CheckPasswordBackend')
+            user.is_staff = False
+            user.is_superuser = False
+            user.points = 0
+            user.save()
             return redirect('/kess')
     else:
         form = SignUpForm()
