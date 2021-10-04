@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path, re_path
 
 from . import views
 
@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('add_kess/', views.add_kess, name='add_kess'),
     path('<int:kess_id>/', views.detail, name='detail'),
+    re_path(r"^auth/", include("kess.auth")),
 ]

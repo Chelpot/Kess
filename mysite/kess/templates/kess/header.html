@@ -43,7 +43,7 @@
             </form>
             <ul class="userNavbar navbar-nav mr-auto">
                 {% if user.is_authenticated %}
-                    <li class="nav-link">{{ user.get_username }}</li>
+                    <li class="nav-link">{{ user.name }}</li>
                     <li>
                         <a class="nav-link" href="{% url 'logout'%}?next={{request.path}}">Logout</a>
                     </li>
