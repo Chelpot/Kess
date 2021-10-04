@@ -1,0 +1,14 @@
+{% include "kess/header.html" %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
+
+<h2>S'identifier</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Log In</button>
+</form>
+
+<a href="{% url 'kess:signup'%}">Créer un compte</a>
+

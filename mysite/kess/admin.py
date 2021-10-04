@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Kess
+from .models import Kess, User
 
 
 class KessAdmin(admin.ModelAdmin):
@@ -8,4 +8,10 @@ class KessAdmin(admin.ModelAdmin):
     list_display = ('reponse', 'emoji', 'created_at', 'category')
 
 
+class UserAdmin(admin.ModelAdmin):
+    fields = ['email', 'name', 'points', 'is_superuser', 'creation_date']
+    list_display = ('email', 'name', 'points', 'is_superuser', 'creation_date')
+
+
 admin.site.register(Kess, KessAdmin)
+admin.site.register(User, UserAdmin)

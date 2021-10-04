@@ -2,6 +2,7 @@ import typing
 import json
 
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.backends import ModelBackend
 from django.http import HttpResponse
 from django.urls import re_path
 from django.views.decorators.http import require_http_methods
@@ -10,7 +11,7 @@ from . import services
 from .models import User
 
 
-class CheckPasswordBackend:
+class CheckPasswordBackend(ModelBackend):
 
     def authenticate(self, request=None, email=None, password=None) -> typing.Optional[User]:
         user = services.find_user_by_email(email=email)
@@ -40,6 +41,7 @@ def login_view(request):
         return HttpResponse("OK")
     else:
         return HttpResponse("Unauthorized", status=401)
+
 
 urlpatterns = [
     re_path("^login$", login_view),

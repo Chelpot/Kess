@@ -1,7 +1,9 @@
-from django.http import Http404
-from django.shortcuts import get_object_or_404, render
 from datetime import *
 
+from django.contrib.auth import authenticate, login
+from django.shortcuts import get_object_or_404, render, redirect
+
+from .forms import SignUpForm
 from .models import Kess
 
 
@@ -43,3 +45,18 @@ def detail(request, kess_id):
 def add_kess(request):
     context = {'': ''}
     return render(request, 'kess/add_kess.html', context)
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            email = form.cleaned_data.get('email')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(email=email, password=raw_password)
+            login(request, user, backend='kess.auth.CheckPasswordBackend')
+            return redirect('/kess')
+    else:
+        form = SignUpForm()
+    return render(request, 'kess/signup.html', {'form': form})
