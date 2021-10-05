@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'emoji_picker',
 ]
 
 AUTH_USER_MODEL = 'kess.User'

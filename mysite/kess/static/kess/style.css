@@ -41,6 +41,21 @@ padding: 2em 0;
   text-decoration: inherit;
 }
 
+.dep-button{
+    color: white !important;
+}
+
+.emoji-mart-title-label{
+    display: none;
+}
+
+.emoji-mart-preview-skins{
+    display: none;
+}
+
+span[aria-label="🏬, department_store"]{
+    display: none;
+}
 /*
 F7D59C
 F3F0D7
