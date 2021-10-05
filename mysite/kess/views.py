@@ -13,7 +13,9 @@ def index(request):
     latest_kess_list = Kess.objects.filter(
         is_ready_to_publish=True,
     ).order_by('-published_at')[:10]
-    context = {'latest_kess_list': latest_kess_list}
+    latest_community_kess_list = []
+    context = {'latest_kess_list': latest_kess_list,
+               'latest_community_kess_list': latest_community_kess_list}
     return render(request, 'kess/index.html', context)
 
 

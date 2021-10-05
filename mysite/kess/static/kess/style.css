@@ -11,7 +11,7 @@ body {
     background-color: #5E454B;
     border-radius: 1em;
     margin: 5em auto 1em;
-    padding: 4em 4em 1em;
+    padding: 2em;
     text-align: left;
 }
  /* Detail kess */
@@ -55,6 +55,30 @@ padding: 2em 0;
 
 span[aria-label="🏬, department_store"]{
     display: none;
+}
+
+/*
+==========INDEX==========
+*/
+
+.indexBox{
+    display: inline-block;
+    vertical-align: top;
+    margin: 1em;
+    height: 20em;
+    width: 37em;
+}
+
+.smallFont{
+    font-size: 25px;
+}
+
+.indexContainerTitle{
+}
+
+.indexContainerUl{
+    list-style: none;
+    margin-top: 1em;
 }
 /*
 F7D59C

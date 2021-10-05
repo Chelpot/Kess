@@ -1,16 +1,42 @@
 {% include "kess/header.html" %}
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
 
-{% if latest_kess_list %}
-    <ul style="list-style: none;">
-    {% for kess in latest_kess_list %}
-        <li><h1>
-            <a href="{% url 'kess:detail' kess.id %}">{{ kess.emoji }}</a>
-        </h1></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No kess are available.</p>
-{% endif %}
+
+<div class="container indexBox">
+    <span>Kess du staff</span>
+    {% if latest_kess_list %}
+        <ul class="indexContainerUl">
+        {% for kess in latest_kess_list %}
+            <li>
+                <h1>
+                    <a class="smallFont" href="{% url 'kess:detail' kess.id %}">{{ kess.emoji }}</a>
+                </h1>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>☹ Aucun Kess disponible</p>
+    {% endif %}
+    </span>
+</div>
+
+<div class="container indexBox">
+    <span class="indexContainerTitle">Kess de la communauté</span>
+    {% if latest_community_kess_list %}
+        <ul class="indexContainerUl">
+        {% for kess in latest_community_kess_list %}
+            <li>
+                <h1>
+                    <a class="smallFont" href="{% url 'kess:detail' kess.id %}">{{ kess.emoji }}</a>
+                </h1>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>☹ Aucun Kess disponible</p>
+    {% endif %}
+    </span>
+</div>
