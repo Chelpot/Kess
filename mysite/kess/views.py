@@ -1,10 +1,11 @@
 from datetime import *
 
 from django.contrib.auth import authenticate, login
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, render, redirect
 
 from .forms import SignUpForm
-from .models import Kess
+from .models import Kess, User
 
 
 def index(request):
@@ -14,6 +15,13 @@ def index(request):
     ).order_by('-published_at')[:10]
     context = {'latest_kess_list': latest_kess_list}
     return render(request, 'kess/index.html', context)
+
+
+def classement(request):
+    # Only 100 first users
+    users_list = User.objects.filter(~Q(name='admin')).order_by('-points')[:100]
+    context = {'users_list': users_list}
+    return render(request, 'kess/classement.html', context)
 
 
 def detail(request, kess_id):
