@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
 {% if latest_kess_list %}
-    <ul>
+    <ul style="list-style: none;">
     {% for kess in latest_kess_list %}
         <li><h1>
             <a href="{% url 'kess:detail' kess.id %}">{{ kess.emoji }}</a>
