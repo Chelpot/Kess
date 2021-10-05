@@ -2,13 +2,14 @@
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
+<div class="container">
+    <h2>S'identifier</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Log In</button>
+    </form>
 
-<h2>S'identifier</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
-
-<a href="/kess/signup">Créer un compte</a>
+    <a href="/kess/signup">Créer un compte</a>
+</div>
 
