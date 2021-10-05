@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render, redirect
 
-from .forms import SignUpForm
+from .forms import SignUpForm, CreateKessForm
 from .models import Kess, User
 
 
@@ -79,8 +79,26 @@ def detail(request, kess_id):
 
 
 def add_kess(request):
-    context = {'': ''}
-    return render(request, 'kess/add_kess.html', context)
+    if request.user.is_authenticated:
+
+        if request.method == 'POST':
+            form = CreateKessForm(request.POST)
+            if form.is_valid():
+                kess = form.save(commit=False)
+                kess.is_staff = False
+                kess.is_ready_to_publish = False
+                kess.published_at = datetime.now()
+                kess.created_at = datetime.now()
+                kess.save()
+                return redirect('/kess')
+        else:
+            form = CreateKessForm()
+        context = {'form': form}
+        return render(request, 'kess/add_kess.html', context)
+    else:
+        return render(request, 'kess/must_be_logged_in.html')
+
+
 
 
 def signup(request):

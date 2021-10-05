@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from django.forms import ModelForm
+from .models import User, Kess
 
 
 class SignUpForm(UserCreationForm):
@@ -9,3 +10,10 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('name', 'email', 'password1', 'password2', )
+
+
+class CreateKessForm(ModelForm):
+
+    class Meta:
+        model = Kess
+        fields = ['emoji', 'reponse', 'category']

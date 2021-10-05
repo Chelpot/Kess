@@ -29,7 +29,8 @@ class Kess(models.Model):
     category = models.CharField(
         max_length=200,
         choices=[(tag.value, tag.value) for tag in CategoryChoice],
-        default=CategoryChoice.DIVERS
+        default=CategoryChoice.DIVERS,
+        verbose_name='Categorie'
     )
     foundList = models.TextField(default='', blank=True)
 
