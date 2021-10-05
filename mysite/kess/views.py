@@ -17,8 +17,19 @@ def index(request):
 
 
 def detail(request, kess_id):
+    # Get kess and user objects
     kess = get_object_or_404(Kess, pk=kess_id)
+    user = request.user
+    # Default hint is ''
     kess_hint = ''
+
+    # Get list of users who already found this Kess
+    print(kess.foundList)
+    foundList = kess.foundList.split(',')
+    print(foundList)
+
+    # Does the current user have found this Kess ?
+    answer_state = user.name in kess.foundList
 
     # Only display hint for current kess when it's been 3 days since publication date
     if datetime.now(timezone.utc) > kess.published_at + timedelta(days=3):
@@ -30,11 +41,13 @@ def detail(request, kess_id):
     else:
         kess_hint = "Vous aurez l'indice quand le Kess sera publié depuis 3 jours."
     # TODO: Make it with POST instead, build a form and try to customise it's css
-    if request.method == 'GET':
-        if request.GET.get('answer') == kess.reponse:
+    if request.method == 'POST':
+        if request.POST.get('answer') == kess.reponse:
             answer_state = True
-        else:
-            answer_state = False
+            # Update Kess's list of users who found it
+            foundList.append(user.name)
+            kess.foundList = ','.join(foundList)
+            kess.save()
 
     return render(request, 'kess/detail.html', {'kess': kess,
                                                 'is_answer_valide': answer_state,

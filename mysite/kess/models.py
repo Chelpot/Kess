@@ -31,6 +31,7 @@ class Kess(models.Model):
         choices=[(tag.value, tag.value) for tag in CategoryChoice],
         default=CategoryChoice.DIVERS
     )
+    foundList = models.TextField(default='')
 
     def __str__(self):
         return self.emoji

@@ -12,7 +12,14 @@
     <h3>{{kess_hint}}</h3>
 
     {% if user.is_authenticated %}
-        <form action="" method="get" class="">
+
+        {% if is_answer_valide %}
+        <div class="detail_answer">
+            <h1>Vous avez résolu ce Kess ! La réponse est : </h1>
+            <h1>"{{kess.reponse}}"</h1>
+        </div>
+        {% else %}
+        <form action="" method="POST" class="">
             {% csrf_token %}
             <div class="form-group">
                 <label class="col-form-label" for="answer">Entrez votre proposition: </label>
@@ -22,11 +29,6 @@
                 <input class="btn btn-lg btn-dark" type="submit" value="Essayer la proposition">
             </div>
         </form>
-        {% if is_answer_valide %}
-        <div class="detail_answer">
-            <h1>Bravo ! La réponse était effectivement :</h1>
-            <h1>"{{kess.reponse}}"</h1>
-        </div>
         {% endif %}
         <span>Réponse pour les tests : {{kess.reponse}}</span>
     {% else %}
