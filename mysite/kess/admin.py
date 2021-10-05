@@ -5,6 +5,7 @@ from .models import Kess, User
 
 class KessAdmin(admin.ModelAdmin):
     fields = ['created_at',
+              'created_by',
               'published_at',
               'emoji',
               'reponse',
@@ -12,7 +13,7 @@ class KessAdmin(admin.ModelAdmin):
               'is_staff',
               'is_ready_to_publish',
               'foundList']
-    list_display = ('reponse', 'emoji', 'created_at', 'published_at', 'category', 'foundList')
+    list_display = ('reponse', 'emoji', 'created_at', 'created_by', 'published_at', 'category', 'foundList')
 
 
 class UserAdmin(admin.ModelAdmin):

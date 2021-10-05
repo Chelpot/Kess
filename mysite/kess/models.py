@@ -26,6 +26,7 @@ class Kess(models.Model):
     is_ready_to_publish = models.BooleanField(default=False)
     published_at = models.DateTimeField('date published')
     created_at = models.DateTimeField('date created')
+    created_by = models.CharField(max_length=200, default='anonyme')
     category = models.CharField(
         max_length=200,
         choices=[(tag.value, tag.value) for tag in CategoryChoice],
@@ -37,11 +38,11 @@ class Kess(models.Model):
     def __str__(self):
         return self.emoji
 
-    """
-    ==============================================================
-    USER PART
-    ==============================================================
-    """
+"""
+================================================================================
+USER PART
+================================================================================
+"""
 
 
 class UserManager(BaseUserManager):
@@ -82,7 +83,7 @@ class User(AbstractBaseUser):
 
     name = models.CharField(max_length=32, blank=False, null=False)
     points = models.IntegerField(default=None, blank=True, null=True)
-    creation_date = models.DateTimeField(default=datetime.datetime.now())
+    creation_date = models.DateTimeField(default='date published')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=True)

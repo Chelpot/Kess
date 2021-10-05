@@ -35,9 +35,11 @@ def detail(request, kess_id):
     foundList = kess.foundList.split(',')
 
     # Does the current user have found this Kess ?
-    answer_state = user.name in kess.foundList
+    answer_state = user.name in kess.foundList if user.is_authenticated else False
 
     isLessThan3Days = datetime.now(timezone.utc) < kess.published_at + timedelta(days=3)
+
+    pubDate = datetime.strftime(kess.published_at, '%d %b %Y')
 
     # Only display hint for current kess when it's been 3 days since publication date
     if not isLessThan3Days:
@@ -74,7 +76,8 @@ def detail(request, kess_id):
 
     return render(request, 'kess/detail.html', {'kess': kess,
                                                 'is_answer_valide': answer_state,
-                                                'kess_hint': kess_hint
+                                                'kess_hint': kess_hint,
+                                                'pubDate': pubDate
                                                 })
 
 
@@ -89,6 +92,7 @@ def add_kess(request):
                 kess.is_ready_to_publish = False
                 kess.published_at = datetime.now()
                 kess.created_at = datetime.now()
+                kess.created_by = request.user.name
                 kess.save()
                 return redirect('/kess')
         else:
@@ -97,8 +101,6 @@ def add_kess(request):
         return render(request, 'kess/add_kess.html', context)
     else:
         return render(request, 'kess/must_be_logged_in.html')
-
-
 
 
 def signup(request):
