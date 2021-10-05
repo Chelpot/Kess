@@ -24,15 +24,15 @@ def detail(request, kess_id):
     kess_hint = ''
 
     # Get list of users who already found this Kess
-    print(kess.foundList)
     foundList = kess.foundList.split(',')
-    print(foundList)
 
     # Does the current user have found this Kess ?
     answer_state = user.name in kess.foundList
 
+    isLessThan3Days = datetime.now(timezone.utc) < kess.published_at + timedelta(days=3)
+
     # Only display hint for current kess when it's been 3 days since publication date
-    if datetime.now(timezone.utc) > kess.published_at + timedelta(days=3):
+    if not isLessThan3Days:
         for letter in kess.reponse:
             if ' ' in letter:
                 kess_hint += ' '
@@ -44,6 +44,21 @@ def detail(request, kess_id):
     if request.method == 'POST':
         if request.POST.get('answer') == kess.reponse:
             answer_state = True
+
+            if foundList[0] == '':
+                foundList.pop()
+
+            # Give points to the user
+            totalPoints = 5  # Default points : 5
+            if len(foundList) == 0:  # First to find
+                totalPoints += 20
+            if len(foundList) == 1:  # Second to find
+                totalPoints += 10
+            if isLessThan3Days:  # Less than 3 days
+                totalPoints += 5
+            user.points += totalPoints
+            user.save()
+
             # Update Kess's list of users who found it
             foundList.append(user.name)
             kess.foundList = ','.join(foundList)
