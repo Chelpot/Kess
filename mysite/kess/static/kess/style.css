@@ -3,6 +3,7 @@ body {
     background-color: #F7D59C;
     color: #F3F0D7;
     text-align: center;
+    padding-top: 70px;
 }
 
 .container{
@@ -11,27 +12,9 @@ body {
     width: auto;
     background-color: #5E454B;
     border-radius: 1em;
-    margin: 5em auto 1em;
+    margin: 1em auto 1em;
     padding: 2em;
     text-align: left;
-}
-
- /* Detail kess */
-.title_detail{
-    margin-bottom: 1em;
-}
-
-.kess_img{
-    margin: 1em 0;
-}
-
-.detail-publication-date{
-font-size: 10;
-margin-top: 6em;
-}
-
-.detail_answer{
-padding: 2em 0;
 }
 
 .userNavbar{
@@ -50,6 +33,30 @@ padding: 2em 0;
 .inline{
     display: inline-block;
     vertical-align: top;
+}
+
+/*
+================================================================================
+DETAILS
+================================================================================
+*/
+
+.title_detail{
+    margin-bottom: 0.5em;
+}
+
+.kess_img{
+    margin: 0.5em 0;
+}
+
+.detail-publication-date{
+    font-size: 10;
+    margin-top: 2em;
+    margin-bottom: 0;
+}
+
+.detail_answer{
+    padding: 2em 0;
 }
 
 /*

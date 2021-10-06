@@ -13,7 +13,7 @@
                 <li>
                     <h1>
                         <a class="smallFont link_kess" href="{% url 'kess:detail' kess.id %}">
-                            {% if user_name in kess.foundList %}
+                            {% if user.is_authenticated and user_name in kess.foundList %}
                             ✅
                             {% else %}
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

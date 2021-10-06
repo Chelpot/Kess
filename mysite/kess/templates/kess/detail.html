@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
 <div class="container">
-    <h1 class="title_detail">Kess ?</h1>
+    <h3 class="title_detail">Kess ?</h3>
     <h1 class="kess_img">{{ kess.emoji }}</h1>
     <h3>{{kess_hint}}</h3>
 
@@ -15,8 +15,8 @@
 
         {% if is_answer_valide %}
         <div class="detail_answer">
-            <h1>Vous avez résolu ce Kess ! La réponse est : </h1>
-            <h1>"{{kess.reponse}}"</h1>
+            <h3>Vous avez résolu ce Kess ! La réponse est : </h3>
+            <h3>"{{kess.reponse}}"</h3>
         </div>
         {% else %}
         <form action="" method="POST" class="">
@@ -32,7 +32,6 @@
         {% endif %}
         <span>Réponse pour les tests : {{kess.reponse}}</span>
     {% else %}
-        <br>
         <span>⚠️ Vous devez être connecté pour proposer une réponse</span>
         <br>
         <a class="removeHyperlinkStyling" href="{% url 'login'%}?next={{request.path}}">Se connecter ?</a>
