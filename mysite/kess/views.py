@@ -14,8 +14,12 @@ def index(request):
         is_ready_to_publish=True,
     ).order_by('-published_at')[:10]
     latest_community_kess_list = []
+    user = request.user
+
     context = {'latest_kess_list': latest_kess_list,
-               'latest_community_kess_list': latest_community_kess_list}
+               'latest_community_kess_list': latest_community_kess_list,
+               'user_name' : user.name if user.is_authenticated else ''
+               }
     return render(request, 'kess/index.html', context)
 
 

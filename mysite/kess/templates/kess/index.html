@@ -12,7 +12,14 @@
             {% for kess in latest_kess_list %}
                 <li>
                     <h1>
-                        <a class="smallFont" href="{% url 'kess:detail' kess.id %}">{{ kess.emoji }}</a>
+                        <a class="smallFont link_kess" href="{% url 'kess:detail' kess.id %}">
+                            {% if user_name in kess.foundList %}
+                            ✅
+                            {% else %}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {% endif %}
+                            {{ kess.emoji }}</a>
+
                     </h1>
                 </li>
             {% endfor %}
