@@ -17,8 +17,8 @@ class KessAdmin(admin.ModelAdmin):
 
 
 class UserAdmin(admin.ModelAdmin):
-    fields = ['email', 'name', 'points', 'is_superuser', 'creation_date']
-    list_display = ('email', 'name', 'points', 'is_superuser', 'creation_date')
+    fields = ['email', 'name', 'avatar', 'points', 'is_superuser', 'creation_date']
+    list_display = ('email', 'name', 'avatar', 'points', 'is_superuser', 'creation_date')
 
 
 admin.site.register(Kess, KessAdmin)

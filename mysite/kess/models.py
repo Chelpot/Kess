@@ -80,7 +80,7 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-
+    avatar = models.CharField(max_length=32, default='🙂')
     name = models.CharField(max_length=32, blank=False, null=False)
     points = models.IntegerField(default=None, blank=True, null=True)
     creation_date = models.DateTimeField(default='date published')

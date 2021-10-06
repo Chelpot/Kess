@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render, redirect
 
-from .forms import SignUpForm, CreateKessForm
+from .forms import SignUpForm, CreateKessForm, UserAvatarForm
 from .models import Kess, User
 
 
@@ -122,3 +122,20 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'kess/signup.html', {'form': form})
+
+
+def user(request):
+
+    if request.user.is_authenticated:
+
+        if request.method == 'POST':
+            form = UserAvatarForm(request.POST, initial={'avatar': request.user.avatar})
+            if form.is_valid():
+                avatar = form.cleaned_data.get('avatar')
+                request.user.avatar = avatar
+                request.user.save()
+                return redirect('/kess/user')
+        else:
+            form = UserAvatarForm()
+        context = {'form': form}
+    return render(request, 'kess/user.html', context)

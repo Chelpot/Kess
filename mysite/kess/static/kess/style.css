@@ -4,6 +4,7 @@ body {
     color: #F3F0D7;
     text-align: center;
 }
+
 .container{
     position: static;
     height: auto;
@@ -14,6 +15,7 @@ body {
     padding: 2em;
     text-align: left;
 }
+
  /* Detail kess */
 .title_detail{
     margin-bottom: 1em;
@@ -45,6 +47,17 @@ padding: 2em 0;
     color: white !important;
 }
 
+.inline{
+    display: inline-block;
+    vertical-align: top;
+}
+
+/*
+================================================================================
+EMOJI-PICKER
+================================================================================
+*/
+
 .emoji-mart-title-label{
     display: none;
 }
@@ -57,16 +70,31 @@ span[aria-label="🏬, department_store"]{
     display: none;
 }
 
+.dep-button{
+    right: 0.4rem !important;
+    top: 0.48rem !important;
+    color: gray !important;
+}
+
 /*
-==========INDEX==========
+================================================================================
+INDEX
+================================================================================
 */
 
+.indexTitle{
+
+}
+
+.indexBothBoxes{
+
+}
+
 .indexBox{
-    display: inline-block;
-    vertical-align: top;
     margin: 1em;
     height: 20em;
-    width: 37em;
+    width: 45%;
+    min-width: 37em;
 }
 
 .smallFont{
@@ -80,6 +108,10 @@ span[aria-label="🏬, department_store"]{
     list-style: none;
     margin-top: 1em;
 }
+
+
+
+
 /*
 F7D59C
 F3F0D7

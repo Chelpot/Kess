@@ -11,4 +11,5 @@ urlpatterns = [
     path(r"^auth/", include("kess.auth")),
     path('signup/', views.signup, name='signup'),
     path('classement/', views.classement, name='classement'),
+    path('user/', views.user, name='user'),
 ]
