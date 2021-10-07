@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .forms import SignUpForm, CreateKessForm, UserAvatarForm
 from .models import Kess, User, Tile
 
+from .utils import log_user_action
 
 def index(request):
     user_tiles = Tile.objects.filter()
@@ -96,18 +97,21 @@ def detail(request, kess_id):
 
 
 def add_kess(request):
-    if request.user.is_authenticated:
-
+    current_user = request.user
+    if current_user.is_authenticated:
         if request.method == 'POST':
             form = CreateKessForm(request.POST)
             if form.is_valid():
                 kess = form.save(commit=False)
-                kess.is_staff = request.user.is_staff
+                kess.is_staff = current_user.is_staff
                 kess.is_ready_to_publish = False
                 kess.published_at = datetime.now()
                 kess.created_at = datetime.now()
                 kess.created_by = request.user.name
                 kess.save()
+
+                log_user_action(request, current_user=current_user, action="vient de proposer un Kess")
+
                 return redirect('/kess')
         else:
             form = CreateKessForm()
@@ -129,7 +133,11 @@ def signup(request):
             user.is_staff = False
             user.is_superuser = False
             user.points = 0
+            user.creation_date = datetime.now()
             user.save()
+
+            log_user_action(request, current_user=request.user, action="viens de nous rejoindre ! Bienvenue 😋")
+
             return redirect('/kess')
     else:
         form = SignUpForm()
