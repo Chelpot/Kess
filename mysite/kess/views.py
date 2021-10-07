@@ -5,20 +5,22 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, render, redirect
 
 from .forms import SignUpForm, CreateKessForm, UserAvatarForm
-from .models import Kess, User
+from .models import Kess, User, Tile
 
 
 def index(request):
+    user_tiles = Tile.objects.filter()
     # Look for Kess ready to be published only
     latest_kess_list = Kess.objects.filter(
         is_ready_to_publish=True,
-    ).order_by('-published_at')[:10]
+    ).order_by('-published_at')[:5]
     latest_community_kess_list = []
     user = request.user
 
     context = {'latest_kess_list': latest_kess_list,
                'latest_community_kess_list': latest_community_kess_list,
-               'user_name' : user.name if user.is_authenticated else ''
+               'user_name': user.name if user.is_authenticated else '',
+               'user_tiles': user_tiles
                }
     return render(request, 'kess/index.html', context)
 

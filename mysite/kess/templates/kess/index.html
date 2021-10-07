@@ -47,4 +47,16 @@
         {% endif %}
         </span>
     </div>
+
+    <div class="inline">
+        <ul class="indexContainerUl">
+            {% for tile in user_tiles %}
+            <li class="tileBox">
+                <a>{{ tile.avatar }} {{ tile.name }}</a></br>
+                <a>{{ tile.action }}</a></br>
+                <a>{{ tile.time }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>

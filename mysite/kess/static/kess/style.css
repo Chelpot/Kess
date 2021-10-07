@@ -100,7 +100,7 @@ INDEX
 .indexBox{
     margin: 1em;
     height: 20em;
-    width: 45%;
+    width: 35%;
     min-width: 37em;
 }
 
@@ -121,6 +121,13 @@ INDEX
     margin-top: 1em;
 }
 
+.tileBox{
+    color: gray;
+    background-color: beige;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 20px;
+}
 
 
 

@@ -20,6 +20,13 @@ class CategoryChoice(Enum):
     CELEBRITY = "Célébrités et personnages "
 
 
+class Tile(models.Model):
+    avatar = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+    action = models.CharField(max_length=200)
+    time = models.CharField(max_length=200)
+
+
 class Kess(models.Model):
     emoji = models.CharField(max_length=200, unique=True)
     reponse = models.CharField(max_length=200)
