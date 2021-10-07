@@ -7,9 +7,9 @@
 <div class="indexBothBoxes">
     <div class="container indexBox inline">
         <span>Kess du staff</span>
-        {% if latest_kess_list %}
+        {% if latest_staff_kess_list %}
             <ul class="indexContainerUl">
-            {% for kess in latest_kess_list %}
+            {% for kess in latest_staff_kess_list %}
                 <li>
                     <h1>
                         <a class="smallFont link_kess" href="{% url 'kess:detail' kess.id %}">

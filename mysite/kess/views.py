@@ -10,14 +10,20 @@ from .models import Kess, User, Tile
 
 def index(request):
     user_tiles = Tile.objects.filter()
-    # Look for Kess ready to be published only
-    latest_kess_list = Kess.objects.filter(
+    # Look for Kess ready to be published only and created by staff
+    latest_staff_kess_list = Kess.objects.filter(
         is_ready_to_publish=True,
+        is_staff=True,
     ).order_by('-published_at')[:5]
-    latest_community_kess_list = []
+    # Look for kess created by community
+    latest_community_kess_list = Kess.objects.filter(
+        is_ready_to_publish=True,
+        is_staff=False,
+    ).order_by('-published_at')[:5]
+
     user = request.user
 
-    context = {'latest_kess_list': latest_kess_list,
+    context = {'latest_staff_kess_list': latest_staff_kess_list,
                'latest_community_kess_list': latest_community_kess_list,
                'user_name': user.name if user.is_authenticated else '',
                'user_tiles': user_tiles
@@ -96,7 +102,7 @@ def add_kess(request):
             form = CreateKessForm(request.POST)
             if form.is_valid():
                 kess = form.save(commit=False)
-                kess.is_staff = False
+                kess.is_staff = request.user.is_staff
                 kess.is_ready_to_publish = False
                 kess.published_at = datetime.now()
                 kess.created_at = datetime.now()
