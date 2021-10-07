@@ -1,6 +1,7 @@
 import datetime
 import uuid
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from enum import Enum
 
@@ -73,6 +74,11 @@ class UserManager(BaseUserManager):
         return user
 
 
+def is_ascii(s):
+    if not all(ord(c) < 255 for c in s):
+        raise ValidationError("Charactère(s) interdit(s) dans le pseudo, veuillez en choisir un autre")
+
+
 class User(AbstractBaseUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(
@@ -81,7 +87,7 @@ class User(AbstractBaseUser):
         unique=True,
     )
     avatar = models.CharField(max_length=32, default='🙂')
-    name = models.CharField(max_length=32, blank=False, null=False)
+    name = models.CharField(max_length=32, blank=False, null=False, validators=[is_ascii])
     points = models.IntegerField(default=None, blank=True, null=True)
     creation_date = models.DateTimeField(default='date published')
     is_active = models.BooleanField(default=True)
