@@ -11,7 +11,9 @@ from .utils import log_user_action
 
 
 def index(request):
-    user_tiles = Tile.objects.filter()
+
+    user_tiles = reversed(Tile.objects.filter())
+    
     # Look for Kess ready to be published only and created by staff
     latest_staff_kess_list = Kess.objects.filter(
         is_ready_to_publish=True,
