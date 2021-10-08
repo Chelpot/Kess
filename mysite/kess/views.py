@@ -78,6 +78,7 @@ def detail(request, kess_id):
     answer_state = user.name in kess.foundList if user.is_authenticated else False
 
     isLessThan3Days = datetime.now(timezone.utc) < kess.published_at + timedelta(days=3)
+    isLessThan5Days = datetime.now(timezone.utc) < kess.published_at + timedelta(days=5)
 
     pubDate = datetime.strftime(kess.published_at, '%d %b %Y')
 
@@ -89,8 +90,8 @@ def detail(request, kess_id):
             else:
                 kess_hint += '-'
     else:
-        kess_hint = "Vous aurez l'indice quand le Kess sera publié depuis 3 jours."
-    # TODO: Make it with POST instead, build a form and try to customise it's css
+        kess_hint = "Vous aurez cet indice 3 jours aprés la publication de ce Kess"
+
     if request.method == 'POST':
         if request.POST.get('answer') == kess.reponse:
             answer_state = True
@@ -106,6 +107,9 @@ def detail(request, kess_id):
                 totalPoints += 10
             if isLessThan3Days:  # Less than 3 days
                 totalPoints += 5
+            if isLessThan5Days:  # Less than 5 days
+                totalPoints += 5
+
             user.points += totalPoints
             user.save()
 
@@ -119,7 +123,8 @@ def detail(request, kess_id):
     return render(request, 'kess/detail.html', {'kess': kess,
                                                 'is_answer_valide': answer_state,
                                                 'kess_hint': kess_hint,
-                                                'pubDate': pubDate
+                                                'pubDate': pubDate,
+                                                'display_category_hint': True if datetime.now(timezone.utc) > kess.published_at + timedelta(days=5) else False
                                                 })
 
 

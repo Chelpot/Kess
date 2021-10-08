@@ -21,6 +21,13 @@
         {% else %}
         <form action="" method="POST" class="">
             {% csrf_token %}
+            <p>Catégorie :
+                {%if display_category_hint%}
+                    {{kess.category}}
+                {%else%}
+                    Vous aurez cet indice 5 jours aprés la publication de ce Kess
+                {%endif%}
+            </p>
             <div class="form-group">
                 <label class="col-form-label" for="answer">Entrez votre proposition: </label>
                 <input class="form-control col-lg-5" type="answer" name="answer" id="answer" required>
