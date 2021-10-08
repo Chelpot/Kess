@@ -109,6 +109,8 @@ def detail(request, kess_id):
             user.points += totalPoints
             user.save()
 
+            log_user_action(request, current_user=user, action=f"vient de trouver le Kess {kess.emoji}")
+
             # Update Kess's list of users who found it
             foundList.append(user.name)
             kess.foundList = ','.join(foundList)
