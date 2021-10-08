@@ -159,7 +159,12 @@ INDEX
     background-color: beige;
     border-radius: 5px;
     margin: 10px;
-    padding: 20px;
+    padding: 10px 20px 20px;
+}
+
+.tileTime{
+    font-size: 12px;
+    float: right;
 }
 
 
