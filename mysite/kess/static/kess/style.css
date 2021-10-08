@@ -109,7 +109,6 @@ INDEX
 
 .indexBox{
     margin: 1em;
-    height: 20em;
     /* Firefox */
     width: -moz-calc(50% - 50px);
     /* WebKit */

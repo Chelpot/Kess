@@ -1,0 +1,52 @@
+{% include "kess/header.html" %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
+
+<div class="container indexBox indexBoxLeft inline">
+    <span>Officiels</span>
+    {% if staff_kess_list %}
+        <ul class="indexContainerUl">
+        {% for kess in staff_kess_list %}
+            <li>
+                <h1>
+                    <a class="smallFont link_kess" href="{% url 'kess:detail' kess.id %}">
+                        {% if user.is_authenticated and user_name in kess.foundList %}
+                        ✅
+                        {% else %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% endif %}
+                        {{ kess.emoji }}</a>
+                </h1>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>☹ Aucun Kess disponible</p>
+    {% endif %}
+    </span>
+</div>
+
+<div class="container indexBox indexBoxRight inline">
+    <span class="indexContainerTitle">Kess de la communauté</span>
+    {% if community_kess_list %}
+        <ul class="indexContainerUl">
+        {% for kess in community_kess_list %}
+            <li>
+                <h1>
+                    <a class="smallFont" href="{% url 'kess:detail' kess.id %}">
+                        {% if user.is_authenticated and user_name in kess.foundList %}
+                        ✅
+                        {% else %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% endif %}
+                        {{ kess.emoji }}</a>
+                </h1>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>☹ Aucun Kess disponible</p>
+    {% endif %}
+    </span>
+</div>

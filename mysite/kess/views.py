@@ -13,7 +13,7 @@ from .utils import log_user_action
 def index(request):
 
     user_tiles = reversed(Tile.objects.filter())
-    
+
     # Look for Kess ready to be published only and created by staff
     latest_staff_kess_list = Kess.objects.filter(
         is_ready_to_publish=True,
@@ -33,6 +33,28 @@ def index(request):
                'user_tiles': user_tiles
                }
     return render(request, 'kess/index.html', context)
+
+
+def allKess(request):
+
+    user = request.user
+
+    staff_kess_list = Kess.objects.filter(
+        is_ready_to_publish=True,
+        is_staff=True,
+    ).order_by('-published_at')
+    community_kess_list = Kess.objects.filter(
+        is_ready_to_publish=True,
+        is_staff=False,
+    ).order_by('-published_at')
+
+    context = {'staff_kess_list': staff_kess_list,
+               'community_kess_list': community_kess_list,
+               'user_name': user.name if user.is_authenticated else '',
+               }
+
+    return render(request, 'kess/allKess.html', context)
+
 
 
 def classement(request):
