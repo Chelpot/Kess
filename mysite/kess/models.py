@@ -95,7 +95,7 @@ class User(AbstractBaseUser):
         unique=True,
     )
     avatar = models.CharField(max_length=32, default='🙂')
-    name = models.CharField(max_length=32, blank=False, null=False, validators=[is_ascii])
+    name = models.CharField(max_length=32, blank=False, null=False, validators=[is_ascii], unique=True)
     points = models.IntegerField(default=None, blank=True, null=True)
     creation_date = models.DateTimeField(default=datetime.datetime.now())
     is_active = models.BooleanField(default=True)
