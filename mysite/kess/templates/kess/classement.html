@@ -3,15 +3,44 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
+<div class="container classementList">
 {% if users_list %}
-    <ul>
+    <ul class="classementContainerUl">
     {% for user in users_list %}
-        <li><h1>
-            <span>{{ user.name }}</span>
-            <span>{{ user.points }}</span>
-        </h1></li>
+        <li>
+            <h4>
+                <div>
+                    <div class="inline">
+                        <span>{{ user.avatar }}</span>
+                        <span>{{ user.name }}</span>
+                    </div>
+                    <div class="inline classementScore">
+                        <span>{{ user.points }}</span>
+                    </div>
+                </div>
+            </h4>
+        </li>
     {% endfor %}
     </ul>
 {% else %}
     <p>Aucun utilisateur dans le top</p>
 {% endif %}
+</div>
+
+<div class="classementPointsReminders">
+    <a>
+        🔔 Rappel des points pour chaque Kess trouvé :
+    </a></br>
+    <a>
+        ✅ 5 points de base
+    </a></br>
+    <a>
+        😎 5 points si trouvé sans indice (moins de 3 jours après la publication)
+    </a></br>
+    <a>
+        🥇 20 points si trouvé en premier
+    </a></br>
+    <a>
+        🥈 10 points si trouvé en second
+    </a></br>
+</div>

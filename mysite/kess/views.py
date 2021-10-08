@@ -9,6 +9,7 @@ from .models import Kess, User, Tile
 
 from .utils import log_user_action
 
+
 def index(request):
     user_tiles = Tile.objects.filter()
     # Look for Kess ready to be published only and created by staff

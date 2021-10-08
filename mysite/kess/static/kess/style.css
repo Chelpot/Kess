@@ -130,6 +130,41 @@ INDEX
 }
 
 
+/*
+================================================================================
+CLASSEMENT
+================================================================================
+*/
+
+.classementContainerUl{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.classementList{
+    width: 35%;
+    float: left;
+    margin-left: 2em;
+}
+
+.classementScore{
+    float: right;
+}
+
+.classementPointsReminders{
+    width: 50%;
+    float: right;
+    margin: 1em auto 1em;
+    margin-right: 2em;
+    padding: 2em;
+    border-radius: 1em;
+    background-color: #f8f9fa;
+    color: gray;
+    text-align: left;
+}
+
+
 
 /*
 F7D59C
