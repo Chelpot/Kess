@@ -19,7 +19,6 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             {% endif %}
                             {{ kess.emoji }}</a>
-
                     </h1>
                 </li>
             {% endfor %}
@@ -37,7 +36,13 @@
             {% for kess in latest_community_kess_list %}
                 <li>
                     <h1>
-                        <a class="smallFont" href="{% url 'kess:detail' kess.id %}">{{ kess.emoji }}</a>
+                        <a class="smallFont" href="{% url 'kess:detail' kess.id %}">
+                            {% if user.is_authenticated and user_name in kess.foundList %}
+                            ✅
+                            {% else %}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {% endif %}
+                            {{ kess.emoji }}</a>
                     </h1>
                 </li>
             {% endfor %}

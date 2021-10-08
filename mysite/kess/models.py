@@ -17,7 +17,8 @@ class CategoryChoice(Enum):
     EXPRESSION = "Expressions"
     CULINARY = "Alimentation"
     SPORT = "Sport"
-    CELEBRITY = "Célébrités et personnages "
+    CELEBRITY = "Célébrités et personnages"
+    ART = "Art et mode"
 
 
 class Tile(models.Model):
