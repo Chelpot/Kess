@@ -4,8 +4,13 @@
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}" xmlns="http://www.w3.org/1999/html"
       xmlns="http://www.w3.org/1999/html">
 
-<div class="indexBothBoxes">
-    <div class="container indexBox inline">
+
+<div class="indexTitle">
+    <h1>Bienvenue sur Kess !</h1>
+</div>
+
+<div class="indexBothBoxes inline">
+    <div class="container indexBox indexBoxLeft inline">
         <span>Kess du staff</span>
         {% if latest_staff_kess_list %}
             <ul class="indexContainerUl">
@@ -29,7 +34,7 @@
         </span>
     </div>
 
-    <div class="container indexBox inline">
+    <div class="container indexBox indexBoxRight inline">
         <span class="indexContainerTitle">Kess de la communauté</span>
         {% if latest_community_kess_list %}
             <ul class="indexContainerUl">
@@ -52,16 +57,16 @@
         {% endif %}
         </span>
     </div>
+</div>
 
-    <div class="inline">
-        <ul class="indexContainerUl">
-            {% for tile in user_tiles %}
-            <li class="tileBox">
-                <a>{{ tile.avatar }} {{ tile.name }}</a></br>
-                <a>{{ tile.action }}</a></br>
-                <a>{{ tile.time }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
+<div class="inline tileColumn">
+    <ul class="indexContainerUl">
+        {% for tile in user_tiles %}
+        <li class="tileBox">
+            <a>{{ tile.time }}</a></br>
+            <a>{{ tile.avatar }} {{ tile.name }}</a></br>
+            <a>{{ tile.action }}</a>
+        </li>
+        {% endfor %}
+    </ul>
 </div>

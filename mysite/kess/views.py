@@ -137,7 +137,7 @@ def signup(request):
             user.creation_date = datetime.now()
             user.save()
 
-            log_user_action(request, current_user=request.user, action="viens de nous rejoindre ! Bienvenue 😋")
+            log_user_action(request, current_user=request.user, action="nous a rejoints ! Bienvenue 😋")
 
             return redirect('/kess')
     else:
