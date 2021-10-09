@@ -82,11 +82,6 @@ class UserManager(BaseUserManager):
         return user
 
 
-def is_ascii(s):
-    if not all(ord(c) < 255 for c in s):
-        raise ValidationError("Charactère(s) interdit(s) dans le pseudo, veuillez en choisir un autre")
-
-
 class User(AbstractBaseUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(
