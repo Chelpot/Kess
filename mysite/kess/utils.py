@@ -9,8 +9,3 @@ def log_user_action(request, current_user, action="a fait quelque chose"):
         tile_event.avatar = current_user.avatar
         tile_event.action = action
         tile_event.save()
-
-
-def is_ascii(s):
-    if not all(ord(c) < 255 for c in s):
-        raise ValidationError("Charactère(s) interdit(s) dans le pseudo, veuillez en choisir un autre")
