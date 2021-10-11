@@ -3,6 +3,14 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
+<div class="filterButtons">
+    {% for name, value in catNames|zip:catValues %}
+        <form class="inline" action="#" method="get">
+            <input type="submit" class="btn boutonFiltreCat" value={{ value }} name={{ name }}>
+        </form>
+    {% endfor %}
+</div>
+
 <div class="container indexBox indexBoxLeft inline">
     <span>Officiels</span>
     {% if staff_kess_list %}

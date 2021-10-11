@@ -3,15 +3,15 @@ from datetime import *
 from django.contrib.auth import authenticate, login
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render, redirect
+from django.template.defaultfilters import register
 
 from .forms import SignUpForm, CreateKessForm, UserAvatarForm
-from .models import Kess, User, Tile
+from .models import Kess, User, Tile, CategoryChoice
 
 from .utils import log_user_action
 
 
 def index(request):
-
     user_tiles = reversed(Tile.objects.filter())
 
     # Look for Kess ready to be published only and created by staff
@@ -35,26 +35,54 @@ def index(request):
     return render(request, 'kess/index.html', context)
 
 
-def allKess(request):
+@register.filter(name='zip')
+def zip_lists(a, b):
+    return zip(a, b)
 
+
+def allKess(request):
     user = request.user
 
-    staff_kess_list = Kess.objects.filter(
-        is_ready_to_publish=True,
-        is_staff=True,
-    ).order_by('-published_at')
-    community_kess_list = Kess.objects.filter(
-        is_ready_to_publish=True,
-        is_staff=False,
-    ).order_by('-published_at')
+    catNames = list(cat.name for cat in CategoryChoice)
+    catValues = list(cat.value for cat in CategoryChoice)
+
+    filter = 'DIVERS'
+    for name in catNames:
+        if request.GET.get(name):
+            filter = name
+
+    if filter == 'DIVERS':
+        staff_kess_list = Kess.objects.filter(
+            is_ready_to_publish=True,
+            is_staff=True,
+        ).order_by('-published_at')
+        community_kess_list = Kess.objects.filter(
+            is_ready_to_publish=True,
+            is_staff=False,
+        ).order_by('-published_at')
+    else:
+        staff_kess_list = Kess.objects.filter(
+            is_ready_to_publish=True,
+            is_staff=True,
+            category=CategoryChoice[filter].value,
+            published_at__lte=datetime.now(timezone.utc) - timedelta(days=5),
+        ).order_by('-published_at')
+
+        community_kess_list = Kess.objects.filter(
+            is_ready_to_publish=True,
+            is_staff=False,
+            category=CategoryChoice[filter].value,
+            published_at__lte=datetime.now(timezone.utc) - timedelta(days=5),
+        ).order_by('-published_at')
 
     context = {'staff_kess_list': staff_kess_list,
                'community_kess_list': community_kess_list,
                'user_name': user.name if user.is_authenticated else '',
+               'catValues': catValues,
+               'catNames': catNames,
                }
 
     return render(request, 'kess/allKess.html', context)
-
 
 
 def classement(request):
@@ -124,7 +152,8 @@ def detail(request, kess_id):
                                                 'is_answer_valide': answer_state,
                                                 'kess_hint': kess_hint,
                                                 'pubDate': pubDate,
-                                                'display_category_hint': True if datetime.now(timezone.utc) > kess.published_at + timedelta(days=5) else False
+                                                'display_category_hint': True if datetime.now(
+                                                    timezone.utc) > kess.published_at + timedelta(days=5) else False
                                                 })
 
 
@@ -177,7 +206,6 @@ def signup(request):
 
 
 def user(request):
-
     if request.user.is_authenticated:
 
         if request.method == 'POST':

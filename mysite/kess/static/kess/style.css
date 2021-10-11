@@ -207,6 +207,20 @@ CLASSEMENT
     text-align: left;
 }
 
+/*
+================================================================================
+CLASSEMENT
+================================================================================
+*/
+
+.boutonFiltreCat{
+    background-color: #f8f9fa;
+    border-radius: 3px;
+    padding: 0px 10px 2px;
+    margin: 5px;
+}
+
+
 
 
 /*
