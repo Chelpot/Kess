@@ -168,8 +168,8 @@ INDEX
 }
 
 .link_kess{
-  color: #FFFFFF;
-  text-decoration: none;
+    color: #FFFFFF;
+    text-decoration: none;
 }
 
 .indexContainerTitle{
@@ -183,7 +183,7 @@ INDEX
 }
 
 .liKessSeparator{
-    border: 1px solid beige;
+    border: 1px solid rgba(245, 245, 220, 0.2);
     width: 73%;
     margin: 10px auto 10px;
     border-radius: 2px;
