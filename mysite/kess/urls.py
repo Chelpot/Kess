@@ -13,4 +13,5 @@ urlpatterns = [
     path('classement/', views.classement, name='classement'),
     path('user/', views.user, name='user'),
     path('allKess/', views.allKess, name='allKess'),
+    path('commu/', views.commu, name='commu'),
 ]

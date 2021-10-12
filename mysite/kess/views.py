@@ -183,6 +183,10 @@ def add_kess(request):
         return render(request, 'kess/must_be_logged_in.html')
 
 
+def commu(request):
+    return render(request, 'kess/commu.html')
+
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
