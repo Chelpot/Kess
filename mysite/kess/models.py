@@ -29,8 +29,8 @@ class Tile(models.Model):
 
 
 class Kess(models.Model):
-    emoji = models.CharField(max_length=200, unique=True)
-    reponse = models.CharField(max_length=200)
+    emoji = models.CharField(max_length=200, unique=True, verbose_name='Kess?')
+    reponse = models.CharField(max_length=200, verbose_name='Réponse')
     is_staff = models.BooleanField(default=False)
     is_ready_to_publish = models.BooleanField(default=False)
     published_at = models.DateTimeField('date published')
@@ -40,7 +40,7 @@ class Kess(models.Model):
         max_length=200,
         choices=[(tag.value, tag.value) for tag in CategoryChoice],
         default=CategoryChoice.DIVERS,
-        verbose_name='Categorie'
+        verbose_name='Catégorie'
     )
     foundList = models.TextField(default='', blank=True)
     nbTries = models.IntegerField(default=None, blank=True, null=True)

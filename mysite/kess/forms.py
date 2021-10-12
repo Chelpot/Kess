@@ -15,7 +15,7 @@ class SignUpForm(UserCreationForm):
 
 
 class CreateKessForm(ModelForm):
-    emoji = forms.CharField(widget=EmojiPickerTextareaAdmin)
+    emoji = forms.CharField(widget=EmojiPickerTextareaAdmin, label='Kess?')
 
     class Meta:
         model = Kess
