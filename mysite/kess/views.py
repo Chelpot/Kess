@@ -102,6 +102,8 @@ def detail(request, kess_id):
     # Get list of users who already found this Kess
     foundList = kess.foundList.split(',')
 
+    kess_diff = 100 if len(foundList) == 0 else '❓' if kess.nbTries == 0 else 100-int(len(foundList)/kess.nbTries*100)
+
     # Does the current user have found this Kess ?
     answer_state = user.name in kess.foundList if user.is_authenticated else False
 
@@ -121,6 +123,7 @@ def detail(request, kess_id):
         kess_hint = "Vous aurez cet indice 3 jours aprés la publication de ce Kess"
 
     if request.method == 'POST':
+        kess.nbTries += 1
         if request.POST.get('answer') == kess.reponse:
             if user.name not in foundList:
                 answer_state = True
@@ -147,14 +150,15 @@ def detail(request, kess_id):
                 # Update Kess's list of users who found it
                 foundList.append(user.name)
                 kess.foundList = ','.join(foundList)
-                kess.save()
+        kess.save()
 
     return render(request, 'kess/detail.html', {'kess': kess,
                                                 'is_answer_valide': answer_state,
                                                 'kess_hint': kess_hint,
                                                 'pubDate': pubDate,
                                                 'display_category_hint': True if datetime.now(
-                                                    timezone.utc) > kess.published_at + timedelta(days=5) else False
+                                                    timezone.utc) > kess.published_at + timedelta(days=5) else False,
+                                                'kess_diff': kess_diff
                                                 })
 
 
@@ -170,6 +174,7 @@ def add_kess(request):
                 kess.published_at = datetime.now()
                 kess.created_at = datetime.now()
                 kess.created_by = request.user.name
+                kess.nbTries = 0
                 kess.save()
 
                 log_user_action(request, current_user=current_user, action="vient de proposer un Kess")

@@ -3,31 +3,37 @@
 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+      xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
 <div class="container">
     <h3 class="title_detail">Kess ?</h3>
     <h1 class="kess_img">{{ kess.emoji }}</h1>
-    <h3>{{kess_hint}}</h3>
 
     {% if user.is_authenticated %}
-
+        <h3>{{kess_hint}}</h3>
         {% if is_answer_valide %}
         <div class="detail_answer">
-            Catégorie : {{kess.category}}
+            Catégorie : {{kess.category}}</br>
+            Indice de difficulté de {{kess_diff}}
             <h3>Vous avez résolu ce Kess ! La réponse est : </h3>
             <h3>"{{kess.reponse}}"</h3>
         </div>
         {% else %}
         <form action="" method="POST" class="">
             {% csrf_token %}
-            <p>Catégorie :
+            <p>
+                Catégorie :
                 {%if display_category_hint%}
                     {{kess.category}}
                 {%else%}
                     Vous aurez cet indice 5 jours aprés la publication de ce Kess
                 {%endif%}
+            </p>
+            <p>
+                Indice de difficulté de
+                    {{kess_diff}}
             </p>
             <div class="form-group">
                 <label class="col-form-label" for="answer">Entrez votre proposition: </label>

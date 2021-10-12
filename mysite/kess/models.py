@@ -43,6 +43,7 @@ class Kess(models.Model):
         verbose_name='Categorie'
     )
     foundList = models.TextField(default='', blank=True)
+    nbTries = models.IntegerField(default=None, blank=True, null=True)
 
     def __str__(self):
         return self.emoji
