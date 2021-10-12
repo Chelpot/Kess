@@ -42,6 +42,10 @@ body {
     vertical-align: top;
 }
 
+.flex{
+    display: flex;
+}
+
 /*
 ================================================================================
 NAVBAR
@@ -176,6 +180,13 @@ INDEX
     margin-top: 1em;
     padding: 0;
     width: 100%;
+}
+
+.liKessSeparator{
+    border: 1px solid beige;
+    width: 73%;
+    margin: 10px auto 10px;
+    border-radius: 2px;
 }
 
 .tileColumn{

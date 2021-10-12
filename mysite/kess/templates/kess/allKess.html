@@ -18,15 +18,27 @@
         {% for kess in staff_kess_list %}
             <li>
                 <h1>
-                    <a class="smallFont link_kess" href="{% url 'kess:detail' kess.id %}">
-                        {% if user.is_authenticated and user_name in kess.foundList %}
-                        ✅
-                        {% else %}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        {% endif %}
-                        {{ kess.emoji }}</a>
+                    <div class="flex">
+                        <div class="inline">
+                            <a class="smallFont">
+                                {% if user.is_authenticated and user_name in kess.foundList %}
+                                ✅
+                                {% else %}
+                                🔳
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="inline">
+                            <a class="smallFont link_kess" href="{% url 'kess:detail' kess.id %}">
+                                {{ kess.emoji }}
+                            </a>
+                        </div>
+                    </div>
                 </h1>
             </li>
+            {% if not forloop.last %}
+            <div class="liKessSeparator"></div>
+            {% endif %}
         {% endfor %}
         </ul>
     {% else %}
@@ -42,15 +54,27 @@
         {% for kess in community_kess_list %}
             <li>
                 <h1>
-                    <a class="smallFont" href="{% url 'kess:detail' kess.id %}">
-                        {% if user.is_authenticated and user_name in kess.foundList %}
-                        ✅
-                        {% else %}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        {% endif %}
-                        {{ kess.emoji }}</a>
+                    <div class="flex">
+                        <div class="inline">
+                            <a class="smallFont">
+                                {% if user.is_authenticated and user_name in kess.foundList %}
+                                ✅
+                                {% else %}
+                                🔳
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="inline">
+                            <a class="smallFont link_kess" href="{% url 'kess:detail' kess.id %}">
+                                {{ kess.emoji }}
+                            </a>
+                        </div>
+                    </div>
                 </h1>
             </li>
+            {% if not forloop.last %}
+            <div class="liKessSeparator"></div>
+            {% endif %}
         {% endfor %}
         </ul>
     {% else %}
