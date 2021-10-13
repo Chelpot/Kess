@@ -90,7 +90,11 @@ DETAILS
 }
 
 .detail_answer{
-    padding: 2em 0;
+    padding: 1em 0;
+}
+
+.kessFoundMessage{
+    margin-top: 1em;
 }
 
 /*
@@ -231,16 +235,24 @@ CLASSEMENT
     float: right;
 }
 
-.classementPointsReminders{
-    width: 35%;
-    float: right;
+.pointsReminder{
     margin: 1em auto 1em;
-    margin-right: 2em;
     padding: 2em;
     border-radius: 1em;
     background-color: #f8f9fa;
     color: gray;
     text-align: left;
+}
+
+.classementPointsReminders{
+    width: 35%;
+    float: right;
+    margin-right: 2em;
+}
+
+.detailsPointsReminders{
+    width: auto;
+    max-width: 1140px;
 }
 
 .boutonFiltreCat{

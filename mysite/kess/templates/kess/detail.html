@@ -17,7 +17,7 @@
         <div class="detail_answer">
             Catégorie : {{kess.category}}</br>
             Indice de difficulté de {{kess_diff}}
-            <h3>Vous avez résolu ce Kess ! La réponse est : </h3>
+            <h3 class="kessFoundMessage">Vous avez résolu ce Kess ! La réponse est : </h3>
             <h3>"{{kess.reponse}}"</h3>
         </div>
         {% else %}
@@ -54,4 +54,25 @@
         Kess créé par {{ kess.created_by }} et publié le :
         {{ pubDate }}
     </p>
+</div>
+
+<div class="pointsReminder detailsPointsReminders">
+    <a>
+        🔔 Rappel des points pour chaque Kess trouvé :
+    </a></br>
+    <a>
+        ✅ 5 points de base
+    </a></br>
+    <a>
+        😎 5 points si trouvé sans indice (moins de 3 jours après la publication)
+    </a></br>
+    <a>
+        💃 5 points si trouvé sans indication de catégorie (moins de 5 jours après la publication)
+    </a></br>
+    <a>
+        🥈 10 points si trouvé en second
+    </a></br>
+    <a>
+        🥇 20 points si trouvé en premier
+    </a></br>
 </div>
