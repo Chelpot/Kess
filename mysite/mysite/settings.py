@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+
+import django_heroku
 import environ
 
 # Initialise environment variables
@@ -143,3 +145,5 @@ CSRF_COOKIE_SECURE = env('CSRF_COOKIE_SECURE')=='True'
 SESSION_COOKIE_SECURE = env('SESSION_COOKIE_SECURE')=='True'
 
 SECURE_SSL_REDIRECT = False
+
+django_heroku.settings(locals())
