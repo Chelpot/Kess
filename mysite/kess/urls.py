@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('add_kess/', views.add_kess, name='add_kess'),
     path('<int:kess_id>/', views.detail, name='detail'),
-    path(r"^auth/", include("kess.auth")),
+    re_path(r"^auth/", include("kess.auth")),
     path('signup/', views.signup, name='signup'),
     path('classement/', views.classement, name='classement'),
     path('user/', views.user, name='user'),
