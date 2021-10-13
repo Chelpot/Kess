@@ -305,6 +305,10 @@ USER PROFILE
     width: 50%;
 }
 
+.favList{
+    margin-left: 1em;
+}
+
 .liUserProfile{
     margin-bottom: 1em;
 }

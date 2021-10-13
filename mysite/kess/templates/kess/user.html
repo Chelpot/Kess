@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
 {% if user.is_authenticated %}
-    <div class="container userProfile">
+    <div class="container userProfile inline">
         <h2>Ma fiche perso</h2>
         <ul class="ulNoDot">
             <li class="liUserProfile">
@@ -37,7 +37,7 @@
         </ul>
     </div>
 
-    <div class="container favList">
+    <div class="container favList inline">
         <h2>Mes favoris</h2>
         {% for fav in favs %}
         <p>
