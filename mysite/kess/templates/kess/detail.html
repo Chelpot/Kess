@@ -8,7 +8,21 @@
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
 <div class="container">
-    <h3 class="title_detail">Kess ?</h3>
+    <h3 class="title_detail">
+        <a>
+            Kess ?
+        </a>
+        <a>
+            {% if is_fav %}
+                <form class="inline favStar" action="#" method="get">
+                    <input type="submit" class="btn" value="🌟" name="removeFav" title="Retirer des favoris">
+                </form>
+            {% else %}
+                <form class="inline favStar" action="#" method="get">
+                    <input type="submit" class="btn" value="⭐" name="addFav" title="Ajouter aux favoris">
+                </form>
+            {%endif%}
+        </a>
     <h1 class="kess_img">{{ kess.emoji }}</h1>
 
     {% if user.is_authenticated %}

@@ -25,9 +25,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/kess/allKess/">Tous les Kess</a>
                 </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="/kess/add_kess/">Proposer Kess</a>
                 </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="/kess/classement">Classement</a>
                 </li>

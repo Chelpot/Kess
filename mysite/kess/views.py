@@ -102,6 +102,9 @@ def detail(request, kess_id):
     # Get list of users who already found this Kess
     foundList = kess.foundList.split(',')
 
+    favs = user.favs.split(',')
+    is_fav = str(user.id) in favs
+
     kess_diff = 100 if len(foundList) == 0 else '❓' if kess.nbTries == 0 else 100-int(len(foundList)/kess.nbTries*100)
 
     # Does the current user have found this Kess ?
@@ -121,6 +124,18 @@ def detail(request, kess_id):
                 kess_hint += '-'
     else:
         kess_hint = "Vous aurez cet indice 3 jours aprés la publication de ce Kess"
+
+    if request.GET.get("addFav"):
+        is_fav = True
+        favs.append(str(kess_id))
+        user.favs = ','.join(favs)
+        user.save()
+    if request.GET.get("removeFav"):
+        is_fav = False
+        favs.remove(str(kess_id))
+        user.favs = ','.join(favs)
+        user.save()
+    print()
 
     if request.method == 'POST':
         kess.nbTries += 1
@@ -158,7 +173,8 @@ def detail(request, kess_id):
                                                 'pubDate': pubDate,
                                                 'display_category_hint': True if datetime.now(
                                                     timezone.utc) > kess.published_at + timedelta(days=5) else False,
-                                                'kess_diff': kess_diff
+                                                'kess_diff': kess_diff,
+                                                'is_fav': is_fav
                                                 })
 
 

@@ -8,29 +8,29 @@
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
 {% if user.is_authenticated %}
-        <div class="inline">
-            <a class="userPageAvatar">{{ user.avatar }}</a>
-            <a>Modifier l'avatar ?</a>
-            <form method="post">
-                {% csrf_token %}
-                {% for field in form %}
-                <p>
-                    {{ field }}
-                </p>
-                {% endfor %}
-                <button type="submit">Sauvegarder</button>
-            </form>
-        </div>
-        <div class="inline">
-            <a>Pseudo</a>
-            <a>{{ user.name }}</a>
-            </br>
-            <a>Email :</a>
-            <a>{{ user.email }}</a>
-        </div>
-    {% else %}
-        <br>
-        <span>⚠️ Vous n'êtes pas connecté</span>
-        <br>
-        <a class="removeHyperlinkStyling" href="{% url 'login'%}?next={{request.path}}">Se connecter ?</a>
-    {% endif %}
+    <div class="inline">
+        <a class="userPageAvatar">{{ user.avatar }}</a>
+        <a>Modifier l'avatar ?</a>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <p>
+                {{ field }}
+            </p>
+            {% endfor %}
+            <button type="submit">Sauvegarder</button>
+        </form>
+    </div>
+    <div class="inline">
+        <a>Pseudo</a>
+        <a>{{ user.name }}</a>
+        </br>
+        <a>Email :</a>
+        <a>{{ user.email }}</a>
+    </div>
+{% else %}
+    <br>
+    <span>⚠️ Vous n'êtes pas connecté</span>
+    <br>
+    <a class="removeHyperlinkStyling" href="{% url 'login'%}?next={{request.path}}">Se connecter ?</a>
+{% endif %}

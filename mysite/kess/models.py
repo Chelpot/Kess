@@ -102,6 +102,7 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=True)
+    favs = models.TextField(default='', blank=True)
 
     objects = UserManager()
 
