@@ -95,14 +95,14 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    avatar = models.CharField(max_length=32, default='🙂')
+    avatar = models.CharField(max_length=1, default='🙂')
     name = models.CharField(max_length=32, blank=False, null=False, validators=[is_ascii], unique=True)
     points = models.IntegerField(default=None, blank=True, null=True)
     creation_date = models.DateTimeField(default=datetime.datetime.now())
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=True)
-    favs = models.TextField(default='', blank=True)
+    favs = models.TextField(default=None, blank=True)
 
     objects = UserManager()
 

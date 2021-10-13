@@ -18,8 +18,8 @@ class KessAdmin(admin.ModelAdmin):
 
 
 class UserAdmin(admin.ModelAdmin):
-    fields = ['email', 'name', 'avatar', 'points', 'is_superuser', 'creation_date']
-    list_display = ('email', 'name', 'avatar', 'points', 'is_superuser', 'creation_date')
+    fields = ['email', 'name', 'avatar', 'points', 'favs', 'is_superuser', 'creation_date']
+    list_display = ('email', 'name', 'avatar', 'points', 'favs', 'is_superuser', 'creation_date')
 
 
 class TileAdmin(admin.ModelAdmin):

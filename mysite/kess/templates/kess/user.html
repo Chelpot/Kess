@@ -8,25 +8,39 @@
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
 {% if user.is_authenticated %}
-    <div class="inline">
-        <a class="userPageAvatar">{{ user.avatar }}</a>
-        <a>Modifier l'avatar ?</a>
-        <form method="post">
-            {% csrf_token %}
-            {% for field in form %}
-            <p>
-                {{ field }}
-            </p>
-            {% endfor %}
-            <button type="submit">Sauvegarder</button>
-        </form>
+    <div class="container userProfile">
+        <h2>Ma fiche perso</h2>
+        <ul class="ulNoDot">
+            <li class="liUserProfile">
+                <a>➡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.avatar }} {{ user.name }}</a>
+            </li>
+            <li class="liUserProfile">
+                <a>📧&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.email }}</a>
+            </li>
+            <li class="liUserProfile">
+                <a>Modifier l'avatar ?</a>
+            </li>
+            <li class="liUserProfile">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <p>
+                        {{ field }}
+                    </p>
+                    {% endfor %}
+                    <button class="inline saveAvatarButton" type="submit">Sauvegarder</button>
+                </form>
+            </li>
+        </ul>
     </div>
-    <div class="inline">
-        <a>Pseudo</a>
-        <a>{{ user.name }}</a>
-        </br>
-        <a>Email :</a>
-        <a>{{ user.email }}</a>
+
+    <div class="container favList">
+        <h2>Mes favoris</h2>
+        {% for fav in favs %}
+        <p>
+            <a href="{% url 'kess:detail' fav.id %}">{{ fav.emoji }}</a>
+        </p>
+        {% endfor %}
     </div>
 {% else %}
     <br>

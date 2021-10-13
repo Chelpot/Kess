@@ -24,4 +24,4 @@ class CreateKessForm(ModelForm):
 
 class UserAvatarForm(forms.Form):
 
-    avatar = forms.CharField(widget=EmojiPickerTextInputAdmin)
+    avatar = forms.CharField(widget=EmojiPickerTextInputAdmin, max_length=1)

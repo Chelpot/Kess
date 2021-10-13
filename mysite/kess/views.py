@@ -103,7 +103,7 @@ def detail(request, kess_id):
     foundList = kess.foundList.split(',')
 
     favs = user.favs.split(',')
-    is_fav = str(user.id) in favs
+    is_fav = str(kess.id) in favs
 
     kess_diff = 100 if len(foundList) == 0 else '❓' if kess.nbTries == 0 else 100-int(len(foundList)/kess.nbTries*100)
 
@@ -232,16 +232,27 @@ def signup(request):
 
 
 def user(request):
+
+    user = request.user
+
+    favIdList = user.favs.split(',')
+
+    favs=[]
+    for id in favIdList:
+        if id != '':
+            favs.append(Kess.objects.get(pk=id))
+
     if request.user.is_authenticated:
 
         if request.method == 'POST':
             form = UserAvatarForm(request.POST, initial={'avatar': request.user.avatar})
             if form.is_valid():
                 avatar = form.cleaned_data.get('avatar')
-                request.user.avatar = avatar
+                request.user.avatar = str(avatar)[0]
                 request.user.save()
                 return redirect('/kess/user')
         else:
             form = UserAvatarForm()
-        context = {'form': form}
+        context = {'form': form, 'favs': favs}
+
     return render(request, 'kess/user.html', context)

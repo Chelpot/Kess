@@ -1,6 +1,7 @@
 from .models import Tile
 from datetime import datetime
 
+
 def log_user_action(request, current_user, action="a fait quelque chose"):
     if not current_user.is_staff:
         tile_event = Tile()

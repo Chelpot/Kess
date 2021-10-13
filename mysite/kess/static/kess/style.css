@@ -47,6 +47,10 @@ body {
     display: flex;
 }
 
+.ulNoDot{
+    list-style: none;
+}
+
 /*
 ================================================================================
 NAVBAR
@@ -290,6 +294,30 @@ div.dep-container{
     margin-top: -1em;
 }
 
+/*
+================================================================================
+USER PROFILE
+================================================================================
+*/
+
+.userProfile{
+    font-size: 20;
+    width: 50%;
+}
+
+.liUserProfile{
+    margin-bottom: 1em;
+}
+
+#id_avatar{
+    width: 70px;
+    height: 31px;
+}
+
+.saveAvatarButton{
+    color: #5E454B;
+    background-color: #F3F0D7;
+}
 
 /*
 F7D59C
