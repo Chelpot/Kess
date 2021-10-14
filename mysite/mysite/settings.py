@@ -146,4 +146,3 @@ SESSION_COOKIE_SECURE = env('SESSION_COOKIE_SECURE')=='True'
 
 SECURE_SSL_REDIRECT = False
 
-django_heroku.settings(locals())
