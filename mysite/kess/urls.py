@@ -1,5 +1,7 @@
 from django.urls import include, path, re_path
 from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls.static import static
 
 from . import views
 
@@ -13,4 +15,4 @@ urlpatterns = [
     path('classement/', views.classement, name='classement'),
     path('user/', views.user, name='user'),
     path('allKess/', views.allKess, name='allKess'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
