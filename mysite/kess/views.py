@@ -258,3 +258,21 @@ def user(request):
         context = {'form': form, 'favs': favs}
 
     return render(request, 'kess/user.html', context)
+
+
+def userPublic(request, user_name):
+
+    user = request.user
+
+    userP = get_object_or_404(User, name=user_name)
+
+    favIdList = userP.favs.split(',')
+
+    favs = []
+    for id in favIdList:
+        if id != '':
+            favs.append(Kess.objects.get(pk=id))
+
+        context = {'favs': favs, 'userP': userP}
+
+    return render(request, 'kess/userPublic.html', context)

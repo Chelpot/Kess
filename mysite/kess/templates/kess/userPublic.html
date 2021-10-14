@@ -1,0 +1,32 @@
+{% include "kess/header.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ form.media }}
+{% endblock %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
+
+<div class="container userProfile inline">
+    <h2>Fiche perso</h2>
+    <ul class="ulNoDot">
+        <li class="liUserProfile">
+            <a>➡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ userP.avatar }} {{ userP.name }}</a>
+        </li>
+        <li class="liUserProfile">
+            <a>🕑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.creation_date }}</a>
+        </li>
+        <li class="liUserProfile">
+            <a class="removeHyperlinkStyling" href="/kess/classement">🏅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ userP.points }} points</a>
+        </li>
+    </ul>
+</div>
+
+<div class="container favList inline">
+    <h2>Favoris</h2>
+    {% for fav in favs %}
+    <p>
+        <a class="removeHyperlinkStyling" href="{% url 'kess:detail' fav.id %}">{{ fav.emoji }}</a>
+    </p>
+    {% endfor %}
+</div>

@@ -31,7 +31,7 @@ body {
 
 .removeHyperlinkStyling{
   color: inherit;
-  text-decoration: inherit;
+  text-decoration: none !important;
 }
 
 .dep-button{
@@ -49,6 +49,10 @@ body {
 
 .ulNoDot{
     list-style: none;
+}
+
+a:hover{
+    color: inherit;
 }
 
 /*
@@ -201,7 +205,7 @@ INDEX
 
 .link_kess{
     color: #FFFFFF;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .indexContainerTitle{

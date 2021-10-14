@@ -18,6 +18,9 @@
                 <a>📧&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.email }}</a>
             </li>
             <li class="liUserProfile">
+                <a>🕑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.creation_date }}</a>
+            </li>
+            <li class="liUserProfile">
                 <a class="removeHyperlinkStyling" href="/kess/classement">🏅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.points }} points</a>
             </li>
             <li class="liUserProfile">
@@ -41,7 +44,7 @@
         <h2>Mes favoris</h2>
         {% for fav in favs %}
         <p>
-            <a href="{% url 'kess:detail' fav.id %}">{{ fav.emoji }}</a>
+            <a class="removeHyperlinkStyling" href="{% url 'kess:detail' fav.id %}">{{ fav.emoji }}</a>
         </p>
         {% endfor %}
     </div>

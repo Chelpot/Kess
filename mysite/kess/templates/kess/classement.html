@@ -10,10 +10,12 @@
         <li>
             <h4>
                 <div>
-                    <div class="inline">
-                        <span>{{ user.avatar }}</span>
-                        <span>{{ user.name }}</span>
-                    </div>
+                    <a class="removeHyperlinkStyling" href="{% url 'kess:userPublic' user.name %}">
+                        <div class="inline">
+                            <span>{{ user.avatar }}</span>
+                            <span>{{ user.name }}</span>
+                        </div>
+                    </a>
                     <div class="inline classementScore">
                         <span>{{ user.points }}</span>
                     </div>
