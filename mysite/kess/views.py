@@ -262,17 +262,26 @@ def user(request):
 
 def userPublic(request, user_name):
 
-    user = request.user
+    userPList = User.objects.filter(
+        name=user_name,
+    )
 
-    userP = get_object_or_404(User, name=user_name)
+    userFound = len(userPList) != 0
 
-    favIdList = userP.favs.split(',')
+    if userFound:
 
-    favs = []
-    for id in favIdList:
-        if id != '':
-            favs.append(Kess.objects.get(pk=id))
+        userP = get_object_or_404(User, name=user_name)
 
-        context = {'favs': favs, 'userP': userP}
+        favIdList = userP.favs.split(',')
 
-    return render(request, 'kess/userPublic.html', context)
+        favs = []
+        for id in favIdList:
+            if id != '':
+                favs.append(Kess.objects.get(pk=id))
+
+            context = {'favs': favs, 'userP': userP, 'userFound': userFound}
+
+        return render(request, 'kess/userPublic.html', context)
+    else:
+        return render(request, 'kess/userNotFound.html')
+
