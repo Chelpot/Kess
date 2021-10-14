@@ -12,17 +12,19 @@
         <a>
             Kess ?
         </a>
-        <a>
-            {% if is_fav %}
-                <form class="inline favStar" action="#" method="get">
-                    <input type="submit" class="btn" value="🌟" name="removeFav" title="Retirer des favoris">
-                </form>
-            {% else %}
-                <form class="inline favStar" action="#" method="get">
-                    <input type="submit" class="btn" value="⭐" name="addFav" title="Ajouter aux favoris">
-                </form>
-            {%endif%}
-        </a>
+        {% if user.is_authenticated %}
+            <a>
+                {% if is_fav %}
+                    <form class="inline favStar" action="#" method="get">
+                        <input id="isFavStar" type="submit" class="btn" value="✦" name="removeFav" title="Retirer des favoris">
+                    </form>
+                {% else %}
+                    <form class="inline favStar" action="#" method="get">
+                        <input id="isntFavStar" type="submit" class="btn" value="✧" name="addFav" title="Ajouter aux favoris">
+                    </form>
+                {% endif %}
+            </a>
+        {% endif %}
     <h1 class="kess_img">{{ kess.emoji }}</h1>
 
     {% if user.is_authenticated %}

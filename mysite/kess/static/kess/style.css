@@ -106,6 +106,17 @@ DETAILS
     float: right;
 }
 
+#isFavStar{
+    font-size: 40px;
+    color: yellow;
+}
+
+#isntFavStar{
+    font-size: 40px;
+}
+
+
+
 /*
 ================================================================================
 EMOJI-PICKER
