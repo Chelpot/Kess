@@ -89,7 +89,11 @@
         <li class="tileBox">
             <a class="tileTime">{{ tile.time }}</a></br>
             <a class="removeHyperlinkStyling" href="{% url 'kess:userPublic' tile.name %}">{{ tile.avatar }} {{ tile.name }}</a></br>
-            <a>{{ tile.action }}</a>
+            {% if not tile.kessId == '' %}
+                <a class="removeHyperlinkStyling"  href="{% url 'kess:detail' tile.kessId %}" >{{ tile.action }}</a>
+            {% else %}
+                <a>{{ tile.action }}</a>
+            {% endif %}
         </li>
         {% endfor %}
     </ul>

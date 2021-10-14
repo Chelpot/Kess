@@ -11,6 +11,13 @@ from .models import Kess, User, Tile, CategoryChoice
 from .utils import log_user_action
 
 
+#  ██ ███    ██ ██████  ███████ ██   ██
+#  ██ ████   ██ ██   ██ ██       ██ ██
+#  ██ ██ ██  ██ ██   ██ █████     ███
+#  ██ ██  ██ ██ ██   ██ ██       ██ ██
+#  ██ ██   ████ ██████  ███████ ██   ██
+
+
 def index(request):
     user_tiles = reversed(Tile.objects.filter())
 
@@ -33,6 +40,13 @@ def index(request):
                'user_tiles': user_tiles
                }
     return render(request, 'kess/index.html', context)
+
+
+#   █████  ██      ██          ██   ██ ███████ ███████ ███████
+#  ██   ██ ██      ██          ██  ██  ██      ██      ██
+#  ███████ ██      ██          █████   █████   ███████ ███████
+#  ██   ██ ██      ██          ██  ██  ██           ██      ██
+#  ██   ██ ███████ ███████     ██   ██ ███████ ███████ ███████
 
 
 @register.filter(name='zip')
@@ -85,11 +99,25 @@ def allKess(request):
     return render(request, 'kess/allKess.html', context)
 
 
+#   ██████ ██       █████  ███████ ███████ ███████ ███    ███ ███████ ███    ██ ████████
+#  ██      ██      ██   ██ ██      ██      ██      ████  ████ ██      ████   ██    ██
+#  ██      ██      ███████ ███████ ███████ █████   ██ ████ ██ █████   ██ ██  ██    ██
+#  ██      ██      ██   ██      ██      ██ ██      ██  ██  ██ ██      ██  ██ ██    ██
+#   ██████ ███████ ██   ██ ███████ ███████ ███████ ██      ██ ███████ ██   ████    ██
+
+
 def classement(request):
     # Only 100 first users
     users_list = User.objects.filter(~Q(name='admin')).order_by('-points')[:100]
     context = {'users_list': users_list}
     return render(request, 'kess/classement.html', context)
+
+
+#  ██████  ███████ ████████  █████  ██ ██
+#  ██   ██ ██         ██    ██   ██ ██ ██
+#  ██   ██ █████      ██    ███████ ██ ██
+#  ██   ██ ██         ██    ██   ██ ██ ██
+#  ██████  ███████    ██    ██   ██ ██ ███████
 
 
 def detail(request, kess_id):
@@ -162,7 +190,11 @@ def detail(request, kess_id):
                 user.points += totalPoints
                 user.save()
 
-                log_user_action(request, current_user=user, action=f"vient de trouver le Kess {kess.emoji}")
+                log_user_action(request,
+                                current_user=user,
+                                action=f"vient de trouver le Kess {kess.emoji}",
+                                kessId=kess.id
+                                )
 
                 # Update Kess's list of users who found it
                 foundList.append(user.name)
@@ -178,6 +210,13 @@ def detail(request, kess_id):
                                                 'kess_diff': kess_diff,
                                                 'is_fav': is_fav
                                                 })
+
+
+#   █████  ██████  ██████          ██   ██ ███████ ███████ ███████
+#  ██   ██ ██   ██ ██   ██         ██  ██  ██      ██      ██
+#  ███████ ██   ██ ██   ██         █████   █████   ███████ ███████
+#  ██   ██ ██   ██ ██   ██         ██  ██  ██           ██      ██
+#  ██   ██ ██████  ██████  ███████ ██   ██ ███████ ███████ ███████
 
 
 def add_kess(request):
@@ -206,8 +245,22 @@ def add_kess(request):
         return render(request, 'kess/must_be_logged_in.html')
 
 
+#   ██████  ██████  ███    ███ ███    ███ ██    ██
+#  ██      ██    ██ ████  ████ ████  ████ ██    ██
+#  ██      ██    ██ ██ ████ ██ ██ ████ ██ ██    ██
+#  ██      ██    ██ ██  ██  ██ ██  ██  ██ ██    ██
+#   ██████  ██████  ██      ██ ██      ██  ██████
+
+
 def commu(request):
     return render(request, 'kess/commu.html')
+
+
+#  ███████ ██  ██████  ███    ██ ██    ██ ██████
+#  ██      ██ ██       ████   ██ ██    ██ ██   ██
+#  ███████ ██ ██   ███ ██ ██  ██ ██    ██ ██████
+#       ██ ██ ██    ██ ██  ██ ██ ██    ██ ██
+#  ███████ ██  ██████  ██   ████  ██████  ██
 
 
 def signup(request):
@@ -231,6 +284,13 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'kess/signup.html', {'form': form})
+
+
+#  ██    ██ ███████ ███████ ██████
+#  ██    ██ ██      ██      ██   ██
+#  ██    ██ ███████ █████   ██████
+#  ██    ██      ██ ██      ██   ██
+#   ██████  ███████ ███████ ██   ██
 
 
 def user(request):
@@ -258,6 +318,13 @@ def user(request):
         context = {'form': form, 'favs': favs}
 
     return render(request, 'kess/user.html', context)
+
+
+#  ██    ██ ███████ ███████ ██████  ██████  ██    ██ ██████  ██      ██  ██████
+#  ██    ██ ██      ██      ██   ██ ██   ██ ██    ██ ██   ██ ██      ██ ██
+#  ██    ██ ███████ █████   ██████  ██████  ██    ██ ██████  ██      ██ ██
+#  ██    ██      ██ ██      ██   ██ ██      ██    ██ ██   ██ ██      ██ ██
+#   ██████  ███████ ███████ ██   ██ ██       ██████  ██████  ███████ ██  ██████
 
 
 def userPublic(request, user_name):

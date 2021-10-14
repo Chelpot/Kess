@@ -25,6 +25,7 @@ class Tile(models.Model):
     avatar = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     action = models.CharField(max_length=200)
+    kessId = models.CharField(max_length=200, default='', blank=True)
     time = models.CharField(max_length=200)
 
 
