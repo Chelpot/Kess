@@ -9,6 +9,14 @@
             <input type="submit" class="btn boutonFiltreCat" value={{ value }} name={{ name }}>
         </form>
     {% endfor %}
+    {% if user.is_staff %}
+        <form class="inline" action="#" method="get">
+            <input type="submit" class="btn boutonFiltreCat" value="Non publié" name="filterNotPublishedYet">
+        </form>
+    {% endif %}
+
+
+
 </div>
 
 <div class="container indexBox indexBoxLeft inline">
@@ -33,6 +41,16 @@
                                 {{ kess.emoji }}
                             </a>
                         </div>
+                        {% if user.is_staff %}
+                            {% if not kess.is_ready_to_publish %}
+                                <div class="inline">
+                                    <form class="inline noMargin" action="#" method="get">
+                                         <input type="hidden" value={{ kess.id }} name="kessId" size="1"/>
+                                         <input type="submit" class="btn boutonFiltreCat" value="publier" name="publish">
+                                    </form>
+                                </div>
+                            {% endif %}
+                        {% endif %}
                     </div>
                 </h1>
             </li>
@@ -69,6 +87,16 @@
                                 {{ kess.emoji }}
                             </a>
                         </div>
+                        {% if user.is_staff %}
+                            {% if not kess.is_ready_to_publish %}
+                                <div class="inline">
+                                    <form class="inline noMargin" action="#" method="get">
+                                         <input type="hidden" value={{ kess.id }} name="kessId" size="1"/>
+                                         <input type="submit" class="btn boutonFiltreCat" value="publier" name="publish">
+                                    </form>
+                                </div>
+                            {% endif %}
+                        {% endif %}
                     </div>
                 </h1>
             </li>

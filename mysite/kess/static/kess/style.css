@@ -133,6 +133,7 @@ DETAILS
 
 #isntFavStar{
     font-size: 40px;
+    color: #F3F0D7;
 }
 
 .kessDetails{
@@ -149,6 +150,10 @@ DETAILS
 
 .popularityBar{
     height: 10px;
+}
+
+.voteArrow{
+    color: #F3F0D7;
 }
 
 

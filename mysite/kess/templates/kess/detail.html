@@ -52,13 +52,15 @@
                 Indice de difficulté de
                     {{kess_diff}}
             </p>
-            <div class="form-group">
-                <label class="col-form-label" for="answer">Entrez votre proposition: </label>
-                <input class="form-control col-lg-5" type="answer" name="answer" id="answer" required>
-            </div>
-            <div class="form-group">
-                <input class="btn btn-lg btn-dark" type="submit" value="Essayer la proposition">
-            </div>
+            {% if kess.is_ready_to_publish %}
+                <div class="form-group">
+                    <label class="col-form-label" for="answer">Entrez votre proposition: </label>
+                    <input class="form-control col-lg-5" type="answer" name="answer" id="answer" required>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-lg btn-dark" type="submit" value="Essayer la proposition">
+                </div>
+            {% endif %}
         </form>
         {% endif %}
         <span>Réponse pour les tests : {{kess.reponse}}</span>
@@ -70,11 +72,11 @@
 
     <div class="kessPopularity font20">
         <form class="inline noMargin" action="#" method="get">
-            <input id="a1" type="submit" class="btn font20 noPadding" value={{ voteIcon1 }} name="upVote" title="Upvoter">
+            <input id="upvote" type="submit" class="btn font20 noPadding voteArrow" value={{ voteIcon1 }} name="upVote" title="Upvoter">
         </form>
         <a>{{ upPercent }}% / {{ downPercent }}%</a>
         <form class="inline noMargin" action="#" method="get">
-            <input id="a2" type="submit" class="btn font20 noPadding" value={{ voteIcon2 }} name="downVote" title="Downvoter">
+            <input id="downvote" type="submit" class="btn font20 noPadding voteArrow" value={{ voteIcon2 }} name="downVote" title="Downvoter">
         </form>
 
         <div class="kessPopularityBars">
