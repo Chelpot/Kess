@@ -13,8 +13,11 @@ class KessAdmin(admin.ModelAdmin):
               'is_staff',
               'is_ready_to_publish',
               'foundList',
-              'nbTries']
-    list_display = ('reponse', 'emoji', 'created_at', 'created_by', 'published_at', 'category', 'foundList', 'nbTries')
+              'nbTries',
+              'upVotes',
+              'downVotes']
+    list_display = ('reponse', 'emoji', 'created_at', 'created_by', 'published_at', 'category',
+                    'foundList', 'nbTries', 'upVotes', 'downVotes')
 
 
 class UserAdmin(admin.ModelAdmin):

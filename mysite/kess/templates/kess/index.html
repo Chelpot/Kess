@@ -19,7 +19,7 @@
                     <h1>
                         <div class="flex">
                             <div class="inline">
-                                <a class="smallFont">
+                                <a class="font25">
                                     {% if user.is_authenticated and user_name in kess.foundList %}
                                     ✅
                                     {% else %}
@@ -28,7 +28,7 @@
                                 </a>
                             </div>
                             <div class="inline">
-                                <a class="smallFont link_kess" href="{% url 'kess:detail' kess.id %}">
+                                <a class="font25 link_kess" href="{% url 'kess:detail' kess.id %}">
                                     {{ kess.emoji }}
                                 </a>
                             </div>
@@ -55,7 +55,7 @@
                     <h1>
                         <div class="flex">
                             <div class="inline">
-                                <a class="smallFont">
+                                <a class="font25">
                                     {% if user.is_authenticated and user_name in kess.foundList %}
                                     ✅
                                     {% else %}
@@ -64,7 +64,7 @@
                                 </a>
                             </div>
                             <div class="inline">
-                                <a class="smallFont link_kess" href="{% url 'kess:detail' kess.id %}">
+                                <a class="font25 link_kess" href="{% url 'kess:detail' kess.id %}">
                                     {{ kess.emoji }}
                                 </a>
                             </div>

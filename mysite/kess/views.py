@@ -124,19 +124,35 @@ def detail(request, kess_id):
     # Get kess and user objects
     kess = get_object_or_404(Kess, pk=kess_id)
     user = request.user
+
     # Default hint is ''
     kess_hint = ''
+
+    # Does the current user have found this Kess ?
+    answer_state = user.name in kess.foundList if user.is_authenticated else False
 
     # Get list of users who already found this Kess
     foundList = kess.foundList.split(',')
 
+    # Get list of users who already voted
+    upVotes = kess.upVotes.split(',')
+    if upVotes[0] == '':
+        upVotes.pop()
+    downVotes = kess.downVotes.split(',')
+    if downVotes[0] == '':
+        downVotes.pop()
+    hasUpVoted = user.name in upVotes if user.is_authenticated else []
+    hasDownVoted = user.name in downVotes if user.is_authenticated else []
+    hasVoted = hasUpVoted or hasDownVoted
+    canVote = not hasVoted and user.is_authenticated and answer_state
+
+    # Parse favs into list
     favs = user.favs.split(',') if user.is_authenticated else []
     is_fav = str(kess.id) in favs
 
-    kess_diff = 100 if len(foundList) == 0 else '❓' if kess.nbTries == 0 else 100-int(len(foundList)/kess.nbTries*100)
-
-    # Does the current user have found this Kess ?
-    answer_state = user.name in kess.foundList if user.is_authenticated else False
+    # Kess difficulty
+    kess_diff = 100 if len(foundList) == 0 else '❓' if kess.nbTries == 0 else 100 - int(
+        len(foundList) / kess.nbTries * 100)
 
     isLessThan3Days = datetime.now(timezone.utc) < kess.published_at + timedelta(days=3)
     isLessThan5Days = datetime.now(timezone.utc) < kess.published_at + timedelta(days=5)
@@ -153,6 +169,7 @@ def detail(request, kess_id):
     else:
         kess_hint = "Vous aurez cet indice 3 jours aprés la publication de ce Kess"
 
+    # Favs
     if user.is_authenticated:
         if request.GET.get("addFav"):
             if not is_fav:
@@ -167,6 +184,44 @@ def detail(request, kess_id):
                 user.favs = ','.join(favs)
                 user.save()
 
+    # Vote
+    if canVote:
+        if request.GET.get("upVote"):
+            upVotes.append(user.name)
+            canVote = False
+            hasUpVoted = True
+            kess.upVotes = ','.join(upVotes)
+            kess.save()
+        if request.GET.get("downVote"):
+            downVotes.append(user.name)
+            canVote = False
+            hasDownVoted = True
+            kess.downVotes = ','.join(downVotes)
+            kess.save()
+
+    # Kess popularity
+    upvotePercentage = 50 if (len(upVotes) + len(downVotes) == 0) \
+        else (len(upVotes) / (len(upVotes) + len(downVotes))) * 100
+    downvotePercentage = 100 - upvotePercentage
+    upWidth = 2 * upvotePercentage
+    downWidth = 2 * downvotePercentage
+    upPercent = int(upvotePercentage)
+    downPercent = 100 - upPercent
+
+    if not user.is_authenticated or not answer_state:
+        voteIcon1 = '⬆'
+        voteIcon2 = '⬇'
+    if user.is_authenticated and answer_state and not hasVoted:
+        voteIcon1 = '⬆'
+        voteIcon2 = '⬇'
+    if user.is_authenticated and answer_state and hasUpVoted:
+        voteIcon1 = '⬆'
+        voteIcon2 = '⇩'
+    if user.is_authenticated and answer_state and hasDownVoted:
+        voteIcon1 = '⇧'
+        voteIcon2 = '⬇'
+
+    # Answer request
     if request.method == 'POST':
         kess.nbTries += 1
         if request.POST.get('answer') == kess.reponse:
@@ -199,17 +254,26 @@ def detail(request, kess_id):
                 # Update Kess's list of users who found it
                 foundList.append(user.name)
                 kess.foundList = ','.join(foundList)
-        kess.save()
+                kess.save()
 
-    return render(request, 'kess/detail.html', {'kess': kess,
-                                                'is_answer_valide': answer_state,
-                                                'kess_hint': kess_hint,
-                                                'pubDate': pubDate,
-                                                'display_category_hint': True if datetime.now(
-                                                    timezone.utc) > kess.published_at + timedelta(days=5) else False,
-                                                'kess_diff': kess_diff,
-                                                'is_fav': is_fav
-                                                })
+    context = {'kess': kess,
+               'is_answer_valide': answer_state,
+               'kess_hint': kess_hint,
+               'pubDate': pubDate,
+               'display_category_hint': True if datetime.now(
+                   timezone.utc) > kess.published_at + timedelta(days=5) else False,
+               'kess_diff': kess_diff,
+               'is_fav': is_fav,
+               'upWidth': upWidth,
+               'downWidth': downWidth,
+               'upPercent': upPercent,
+               'downPercent': downPercent,
+               'canVote': canVote,
+               'voteIcon1': voteIcon1,
+               'voteIcon2': voteIcon2,
+               }
+
+    return render(request, 'kess/detail.html', context)
 
 
 #   █████  ██████  ██████          ██   ██ ███████ ███████ ███████
@@ -294,12 +358,11 @@ def signup(request):
 
 
 def user(request):
-
     user = request.user
 
     favIdList = user.favs.split(',')
 
-    favs=[]
+    favs = []
     for id in favIdList:
         if id != '':
             favs.append(Kess.objects.get(pk=id))
@@ -328,7 +391,6 @@ def user(request):
 
 
 def userPublic(request, user_name):
-
     userPList = User.objects.filter(
         name=user_name,
     )
@@ -351,4 +413,3 @@ def userPublic(request, user_name):
         return render(request, 'kess/userPublic.html', context)
     else:
         return render(request, 'kess/userNotFound.html')
-

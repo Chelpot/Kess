@@ -55,6 +55,22 @@ a:hover{
     color: inherit;
 }
 
+.noPadding{
+    padding: 0 !important;
+}
+
+.noMargin{
+    margin: 0 !important;
+}
+
+.font25{
+    font-size: 25px;
+}
+
+.font20{
+    font-size: 20px;
+}
+
 /*
 ================================================================================
 NAVBAR
@@ -119,6 +135,21 @@ DETAILS
     font-size: 40px;
 }
 
+.kessDetails{
+}
+
+.kessPopularity{
+    text-align: center;
+    width: max-content;
+}
+
+.kessPopularityBars{
+    width: max-content;
+}
+
+.popularityBar{
+    height: 10px;
+}
 
 
 /*
@@ -197,10 +228,6 @@ INDEX
 .indexBoxRight{
     right-left: 40px;
     margin-left: 10px;
-}
-
-.smallFont{
-    font-size: 25px;
 }
 
 .link_kess{

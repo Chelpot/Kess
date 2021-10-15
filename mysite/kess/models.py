@@ -45,6 +45,8 @@ class Kess(models.Model):
     )
     foundList = models.TextField(default='', blank=True)
     nbTries = models.IntegerField(default=None, blank=True, null=True)
+    upVotes = models.TextField(default='', blank=True)
+    downVotes = models.TextField(default='', blank=True)
 
     def __str__(self):
         return self.emoji

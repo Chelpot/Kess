@@ -7,7 +7,7 @@
       xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
-<div class="container">
+<div class="container kessDetails">
     <h3 class="title_detail">
         <a>
             Kess ?
@@ -25,6 +25,7 @@
                 {% endif %}
             </a>
         {% endif %}
+    </h3>
     <h1 class="kess_img">{{ kess.emoji }}</h1>
 
     {% if user.is_authenticated %}
@@ -66,9 +67,24 @@
         <br>
         <a class="removeHyperlinkStyling" href="{% url 'login'%}?next={{request.path}}">Se connecter ?</a>
     {% endif %}
+
+    <div class="kessPopularity font20">
+        <form class="inline noMargin" action="#" method="get">
+            <input id="a1" type="submit" class="btn font20 noPadding" value={{ voteIcon1 }} name="upVote" title="Upvoter">
+        </form>
+        <a>{{ upPercent }}% / {{ downPercent }}%</a>
+        <form class="inline noMargin" action="#" method="get">
+            <input id="a2" type="submit" class="btn font20 noPadding" value={{ voteIcon2 }} name="downVote" title="Downvoter">
+        </form>
+
+        <div class="kessPopularityBars">
+            <div class="inline popularityBar" style="background-color: green; width: {{ upWidth }}px"></div>
+            <div class="inline popularityBar" style="background-color: red; width: {{ downWidth }}px"></div>
+        </div>
+    </div>
+
     <p class="detail-publication-date">
-        Kess créé par {{ kess.created_by }} et publié le :
-        {{ pubDate }}
+        Kess créé par {{ kess.created_by }} et publié le : {{ pubDate }}
     </p>
 </div>
 
