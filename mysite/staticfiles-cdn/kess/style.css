@@ -1,0 +1,212 @@
+
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(133deg, rgba(2,0,36,1) 0%, rgba(121,60,9,1) 40%, rgba(0,212,255,1) 100%);    /*background-color: #F7D59C;*/
+    color: #F3F0D7;
+    text-align: center;
+    padding-top: 70px;
+}
+
+.container{
+    position: static;
+    height: auto;
+    width: auto;
+    background-color: #5E454B;
+    border-radius: 1em;
+    margin: 1em auto 1em;
+    padding: 2em;
+    text-align: left;
+}
+
+.userNavbar{
+    margin-right: 0px!important;
+}
+
+.removeHyperlinkStyling{
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.dep-button{
+    color: white !important;
+}
+
+.inline{
+    display: inline-block;
+    vertical-align: top;
+}
+
+/*
+================================================================================
+DETAILS
+================================================================================
+*/
+
+.title_detail{
+    margin-bottom: 0.5em;
+}
+
+.kess_img{
+    margin: 0.5em 0;
+}
+
+.detail-publication-date{
+    font-size: 10;
+    margin-top: 2em;
+    margin-bottom: 0;
+}
+
+.detail_answer{
+    padding: 2em 0;
+}
+
+/*
+================================================================================
+EMOJI-PICKER
+================================================================================
+*/
+
+.emoji-mart-title-label{
+    display: none;
+}
+
+.emoji-mart-preview-skins{
+    display: none;
+}
+
+span[aria-label="🏬, department_store"]{
+    display: none;
+}
+
+.dep-button{
+    right: 0.4rem !important;
+    top: 0.48rem !important;
+    color: gray !important;
+}
+
+/*
+================================================================================
+INDEX
+================================================================================
+*/
+
+.indexTitle{
+ float: left;
+ text-align: left;
+ width: 100%;
+}
+
+.indexBothBoxes{
+    /* Firefox */
+    width: -moz-calc(100% - 280px);
+    /* WebKit */
+    width: -webkit-calc(100% - 280px);
+    /* Opera */
+    width: -o-calc(100% - 280px);
+    /* Standard */
+    width: calc(100% - 280px);
+    float: left;
+}
+
+.indexBox{
+    margin: 1em;
+    /* Firefox */
+    width: -moz-calc(50% - 50px);
+    /* WebKit */
+    width: -webkit-calc(50% - 50px);
+    /* Opera */
+    width: -o-calc(50% - 50px);
+    /* Standard */
+    width: calc(50% - 50px);
+}
+
+.indexBoxLeft{
+    margin-left: 40px;
+    margin-right: 10px;
+}
+
+.indexBoxRight{
+    right-left: 40px;
+    margin-left: 10px;
+}
+
+.smallFont{
+    font-size: 25px;
+}
+
+.link_kess{
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.indexContainerTitle{
+}
+
+.indexContainerUl{
+    list-style: none;
+    margin-top: 1em;
+    padding: 0;
+    width: 100%;
+}
+
+.tileColumn{
+    margin-right: 20px;
+    width: 260px;
+}
+
+.tileBox{
+    color: gray;
+    background-color: beige;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px 20px 20px;
+}
+
+.tileTime{
+    font-size: 12px;
+    float: right;
+}
+
+
+/*
+================================================================================
+CLASSEMENT
+================================================================================
+*/
+
+.classementContainerUl{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.classementList{
+    width: 50%;
+    float: left;
+    margin-left: 2em;
+}
+
+.classementScore{
+    float: right;
+}
+
+.classementPointsReminders{
+    width: 35%;
+    float: right;
+    margin: 1em auto 1em;
+    margin-right: 2em;
+    padding: 2em;
+    border-radius: 1em;
+    background-color: #f8f9fa;
+    color: gray;
+    text-align: left;
+}
+
+
+
+/*
+F7D59C
+F3F0D7
+5E454B
+CEE5D0
+*/
