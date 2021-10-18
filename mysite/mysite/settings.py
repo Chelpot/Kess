@@ -32,7 +32,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')=='True'
 
-ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', 'https://kess-finder-deploy.herokuapp.com/']
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', 'kess-finder-deploy.herokuapp.com/', 'kess-finder-deploy.herokuapp.com/kess/']
 
 # Application definition
 
