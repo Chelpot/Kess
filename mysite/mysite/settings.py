@@ -21,17 +21,18 @@ env = environ.Env()
 environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+# SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = "qdqzdqdzdqfsuehomfgwmsuoehfbwgmhzlfgbmfbhglwklwnslfbs<kehqbkfgwkbfhbgwnbsdjflkgseblkdfg<bkzlrfhegb<fdsd"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')=='True'
-
+# DEBUG = env('DEBUG')=='True'
+DEBUG = False
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', 'kess-finder-deploy.herokuapp.com/', 'kess-finder-deploy.herokuapp.com/kess/']
 
 # Application definition
@@ -88,7 +89,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
@@ -137,21 +138,20 @@ LOGIN_REDIRECT_URL = '/kess/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-CSRF_COOKIE_SECURE = env('CSRF_COOKIE_SECURE')=='True'
+# CSRF_COOKIE_SECURE = env('CSRF_COOKIE_SECURE')=='True'
 
+# SESSION_COOKIE_SECURE = env('SESSION_COOKIE_SECURE')=='True'
 
-SESSION_COOKIE_SECURE = env('SESSION_COOKIE_SECURE')=='True'
-
-SECURE_SSL_REDIRECT = False
+# SECURE_SSL_REDIRECT = False
 
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
 STATICFILES_DIR = [
-    BASE_DIR / "static", #os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles-cdn')
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
