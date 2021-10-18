@@ -15,4 +15,4 @@ urlpatterns = [
     path('classement/', views.classement, name='classement'),
     path('user/', views.user, name='user'),
     path('allKess/', views.allKess, name='allKess'),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
