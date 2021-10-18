@@ -27,12 +27,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = env('SECRET_KEY')
-SECRET_KEY = "qdqzdqdzdqfsuehomfgwmsuoehfbwgmhzlfgbmfbhglwklwnslfbs<kehqbkfgwkbfhbgwnbsdjflkgseblkdfg<bkzlrfhegb<fdsd"
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = env('DEBUG')=='True'
-DEBUG = True
+DEBUG = env('DEBUG')=='True'
+
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', 'kess-finder-deploy.herokuapp.com/', 'kess-finder-deploy.herokuapp.com/kess/']
 
 # Application definition
@@ -138,11 +137,11 @@ LOGIN_REDIRECT_URL = '/kess/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# CSRF_COOKIE_SECURE = env('CSRF_COOKIE_SECURE')=='True'
+CSRF_COOKIE_SECURE = env('CSRF_COOKIE_SECURE')=='True'
 
-# SESSION_COOKIE_SECURE = env('SESSION_COOKIE_SECURE')=='True'
+SESSION_COOKIE_SECURE = env('SESSION_COOKIE_SECURE')=='True'
 
-# SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = False
 
 # Static files (CSS, JavaScript, Images)
 
@@ -153,5 +152,5 @@ STATICFILES_DIR = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles-cdn')
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
 
