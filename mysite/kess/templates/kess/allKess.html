@@ -6,12 +6,12 @@
 <div class="filterButtons">
     {% for name, value in catNames|zip:catValues %}
         <form class="inline" action="#" method="get">
-            <input type="submit" class="btn boutonFiltreCat" value={{ value }} name={{ name }}>
+            <input type="submit" class="btn btn-light" value={{ value }} name={{ name }}>
         </form>
     {% endfor %}
     {% if user.is_staff %}
         <form class="inline" action="#" method="get">
-            <input type="submit" class="btn boutonFiltreCat" value="Non publié" name="filterNotPublishedYet">
+            <input type="submit" class="btn btn-danger" value="Non publié" name="filterNotPublishedYet">
         </form>
     {% endif %}
 
@@ -46,7 +46,7 @@
                                 <div class="inline">
                                     <form class="inline noMargin" action="#" method="get">
                                          <input type="hidden" value={{ kess.id }} name="kessId" size="1"/>
-                                         <input type="submit" class="btn boutonFiltreCat" value="publier" name="publish">
+                                         <input type="submit" class="btn btn-danger" value="publier" name="publish">
                                     </form>
                                 </div>
                             {% endif %}
@@ -92,7 +92,7 @@
                                 <div class="inline">
                                     <form class="inline noMargin" action="#" method="get">
                                          <input type="hidden" value={{ kess.id }} name="kessId" size="1"/>
-                                         <input type="submit" class="btn boutonFiltreCat" value="publier" name="publish">
+                                         <input type="submit" class="btn btn-danger" value="publier" name="publish">
                                     </form>
                                 </div>
                             {% endif %}

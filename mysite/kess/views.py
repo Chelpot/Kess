@@ -383,14 +383,14 @@ def signup(request):
 def user(request):
     user = request.user
 
-    favIdList = user.favs.split(',')
-
-    favs = []
-    for id in favIdList:
-        if id != '':
-            favs.append(Kess.objects.get(pk=id))
-
     if request.user.is_authenticated:
+
+        favIdList = user.favs.split(',')
+
+        favs = []
+        for id in favIdList:
+            if id != '':
+                favs.append(Kess.objects.get(pk=id))
 
         if request.method == 'POST':
             form = UserAvatarForm(request.POST, initial={'avatar': request.user.avatar})
@@ -403,7 +403,10 @@ def user(request):
             form = UserAvatarForm()
         context = {'form': form, 'favs': favs}
 
-    return render(request, 'kess/user.html', context)
+        return render(request, 'kess/user.html', context)
+    else:
+        return render(request, 'kess/must_be_logged_in.html')
+
 
 
 #  ██    ██ ███████ ███████ ██████  ██████  ██    ██ ██████  ██      ██  ██████

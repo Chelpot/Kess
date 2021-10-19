@@ -318,12 +318,6 @@ CLASSEMENT
     max-width: 1140px;
 }
 
-.boutonFiltreCat{
-    background-color: #f8f9fa;
-    border-radius: 3px;
-    padding: 0px 10px 2px;
-    margin: 5px;
-}
 
 
 /*
@@ -363,11 +357,6 @@ USER PROFILE
 #id_avatar{
     width: 70px;
     height: 31px;
-}
-
-.saveAvatarButton{
-    color: #5E454B;
-    background-color: #F3F0D7;
 }
 
 /*
