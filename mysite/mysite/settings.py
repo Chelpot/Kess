@@ -38,7 +38,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 
 
-ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', 'kess-finder.herokuapp.com', 'kess-finder.herokuapp.com/kess']
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', 'kess-finders.herokuapp.com', 'kess-finders.herokuapp.com/kess']
 
 # Application definition
 
