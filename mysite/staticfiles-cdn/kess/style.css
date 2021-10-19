@@ -1,7 +1,18 @@
+/*
+================================================================================
+GENERAL
+================================================================================
+*/
+
+html{
+    min-height: 100%;
+}
 
 body {
+    min-height: 100%;
     background: rgb(2,0,36);
     background: linear-gradient(133deg, rgba(2,0,36,1) 0%, rgba(121,60,9,1) 40%, rgba(0,212,255,1) 100%);    /*background-color: #F7D59C;*/
+    background-attachment: fixed;
     color: #F3F0D7;
     text-align: center;
     padding-top: 70px;
@@ -18,13 +29,9 @@ body {
     text-align: left;
 }
 
-.userNavbar{
-    margin-right: 0px!important;
-}
-
 .removeHyperlinkStyling{
   color: inherit;
-  text-decoration: inherit;
+  text-decoration: none !important;
 }
 
 .dep-button{
@@ -34,6 +41,57 @@ body {
 .inline{
     display: inline-block;
     vertical-align: top;
+}
+
+.flex{
+    display: flex;
+}
+
+.ulNoDot{
+    list-style: none;
+}
+
+a:hover{
+    color: inherit;
+}
+
+.noPadding{
+    padding: 0 !important;
+}
+
+.noMargin{
+    margin: 0 !important;
+}
+
+.font25{
+    font-size: 25px;
+}
+
+.font20{
+    font-size: 20px;
+}
+
+/*
+================================================================================
+NAVBAR
+================================================================================
+*/
+
+.userNavbar{
+    margin-right: 0px!important;
+}
+
+.navbar-brand{
+    position: relative;
+    margin-left: 45px;
+}
+
+.navbar-logo{
+    position: absolute;
+    top: 0;
+    left: -45;
+    width: 40px;
+    height: 40px;
 }
 
 /*
@@ -57,8 +115,47 @@ DETAILS
 }
 
 .detail_answer{
-    padding: 2em 0;
+    padding: 1em 0;
 }
+
+.kessFoundMessage{
+    margin-top: 1em;
+}
+
+.favStar{
+    float: right;
+}
+
+#isFavStar{
+    font-size: 40px;
+    color: yellow;
+}
+
+#isntFavStar{
+    font-size: 40px;
+    color: #F3F0D7;
+}
+
+.kessDetails{
+}
+
+.kessPopularity{
+    text-align: center;
+    width: max-content;
+}
+
+.kessPopularityBars{
+    width: max-content;
+}
+
+.popularityBar{
+    height: 10px;
+}
+
+.voteArrow{
+    color: #F3F0D7;
+}
+
 
 /*
 ================================================================================
@@ -91,9 +188,17 @@ INDEX
 */
 
 .indexTitle{
- float: left;
- text-align: left;
- width: 100%;
+    float: left;
+    text-align: left;
+    /* Firefox */
+    width: -moz-calc(100% - 50px);
+    /* WebKit */
+    width: -webkit-calc(100% - 50px);
+    /* Opera */
+    width: -o-calc(100% - 50px);
+    /* Standard */
+    width: calc(100% - 50px);
+    margin-left: 50px;
 }
 
 .indexBothBoxes{
@@ -130,13 +235,9 @@ INDEX
     margin-left: 10px;
 }
 
-.smallFont{
-    font-size: 25px;
-}
-
 .link_kess{
-  color: #FFFFFF;
-  text-decoration: none;
+    color: #FFFFFF;
+    text-decoration: none !important;
 }
 
 .indexContainerTitle{
@@ -147,6 +248,13 @@ INDEX
     margin-top: 1em;
     padding: 0;
     width: 100%;
+}
+
+.liKessSeparator{
+    border: 1px solid rgba(245, 245, 220, 0.2);
+    width: 73%;
+    margin: 10px auto 10px;
+    border-radius: 2px;
 }
 
 .tileColumn{
@@ -190,11 +298,8 @@ CLASSEMENT
     float: right;
 }
 
-.classementPointsReminders{
-    width: 35%;
-    float: right;
+.pointsReminder{
     margin: 1em auto 1em;
-    margin-right: 2em;
     padding: 2em;
     border-radius: 1em;
     background-color: #f8f9fa;
@@ -202,7 +307,68 @@ CLASSEMENT
     text-align: left;
 }
 
+.classementPointsReminders{
+    width: 35%;
+    float: right;
+    margin-right: 2em;
+}
 
+.detailsPointsReminders{
+    width: auto;
+    max-width: 1140px;
+}
+
+.boutonFiltreCat{
+    background-color: #f8f9fa;
+    border-radius: 3px;
+    padding: 0px 10px 2px;
+    margin: 5px;
+}
+
+
+/*
+================================================================================
+PROPOSER
+================================================================================
+*/
+
+#id_emoji{
+    resize: none;
+    height: 2em;
+}
+
+div.dep-container{
+    margin-top: -1em;
+}
+
+/*
+================================================================================
+USER PROFILE
+================================================================================
+*/
+
+.userProfile{
+    font-size: 20;
+    width: 50%;
+}
+
+.favList{
+    margin-left: 1em;
+}
+
+.liUserProfile{
+    margin-bottom: 1em;
+}
+
+#id_avatar{
+    width: 70px;
+    height: 31px;
+}
+
+.saveAvatarButton{
+    color: #5E454B;
+    background-color: #F3F0D7;
+}
 
 /*
 F7D59C
