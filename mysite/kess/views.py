@@ -362,7 +362,8 @@ def signup(request):
             user.is_staff = False
             user.is_superuser = False
             user.points = 0
-            user.creation_date = datetime.now()
+            user.creation_date = datetime.now(timezone.utc)
+            user.favs = ""
             user.save()
 
             log_user_action(request, current_user=request.user, action="vient de nous rejoindre ! Bienvenue 😋")
