@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
 
+{% if user.is_authenticated %}
 <div class="container">
     <h2>Proposer un Kess</h2>
     <form method="post">
@@ -23,11 +24,17 @@
             <small style="color: grey">{{ field.help_text }}</small>
             {% endif %}
             {% for error in field.errors %}
-        <p style="color: red">{{ error }}</p>
-        {% endfor %}
+                <p style="color: red">{{ error }}</p>
+            {% endfor %}
         </p>
         {% endfor %}
         <button type="submit">Envoyer</button>
     </form>
 
 </div>
+{% else %}
+    <br>
+    <span>⚠️ Vous n'êtes pas connecté</span>
+    <br>
+    <a class="removeHyperlinkStyling" href="{% url 'login'%}?next={{request.path}}">Se connecter ?</a>
+{% endif %}

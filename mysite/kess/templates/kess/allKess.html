@@ -3,6 +3,22 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
+<div class="filterButtons">
+    {% for name, value in catNames|zip:catValues %}
+        <form class="inline" action="#" method="get">
+            <input type="submit" class="btn boutonFiltreCat" value={{ value }} name={{ name }}>
+        </form>
+    {% endfor %}
+    {% if user.is_staff %}
+        <form class="inline" action="#" method="get">
+            <input type="submit" class="btn boutonFiltreCat" value="Non publié" name="filterNotPublishedYet">
+        </form>
+    {% endif %}
+
+
+
+</div>
+
 <div class="container indexBox indexBoxLeft inline">
     <span>Officiels</span>
     {% if staff_kess_list %}
@@ -10,15 +26,37 @@
         {% for kess in staff_kess_list %}
             <li>
                 <h1>
-                    <a class="smallFont link_kess" href="{% url 'kess:detail' kess.id %}">
-                        {% if user.is_authenticated and user_name in kess.foundList %}
-                        ✅
-                        {% else %}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="flex">
+                        <div class="inline">
+                            <a class="font25">
+                                {% if user.is_authenticated and user_name in kess.foundList %}
+                                ✅
+                                {% else %}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="inline">
+                            <a class="font25 link_kess" href="{% url 'kess:detail' kess.id %}">
+                                {{ kess.emoji }}
+                            </a>
+                        </div>
+                        {% if user.is_staff %}
+                            {% if not kess.is_ready_to_publish %}
+                                <div class="inline">
+                                    <form class="inline noMargin" action="#" method="get">
+                                         <input type="hidden" value={{ kess.id }} name="kessId" size="1"/>
+                                         <input type="submit" class="btn boutonFiltreCat" value="publier" name="publish">
+                                    </form>
+                                </div>
+                            {% endif %}
                         {% endif %}
-                        {{ kess.emoji }}</a>
+                    </div>
                 </h1>
             </li>
+            {% if not forloop.last %}
+            <div class="liKessSeparator"></div>
+            {% endif %}
         {% endfor %}
         </ul>
     {% else %}
@@ -34,15 +72,37 @@
         {% for kess in community_kess_list %}
             <li>
                 <h1>
-                    <a class="smallFont" href="{% url 'kess:detail' kess.id %}">
-                        {% if user.is_authenticated and user_name in kess.foundList %}
-                        ✅
-                        {% else %}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="flex">
+                        <div class="inline">
+                            <a class="font25">
+                                {% if user.is_authenticated and user_name in kess.foundList %}
+                                ✅
+                                {% else %}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="inline">
+                            <a class="font25 link_kess" href="{% url 'kess:detail' kess.id %}">
+                                {{ kess.emoji }}
+                            </a>
+                        </div>
+                        {% if user.is_staff %}
+                            {% if not kess.is_ready_to_publish %}
+                                <div class="inline">
+                                    <form class="inline noMargin" action="#" method="get">
+                                         <input type="hidden" value={{ kess.id }} name="kessId" size="1"/>
+                                         <input type="submit" class="btn boutonFiltreCat" value="publier" name="publish">
+                                    </form>
+                                </div>
+                            {% endif %}
                         {% endif %}
-                        {{ kess.emoji }}</a>
+                    </div>
                 </h1>
             </li>
+            {% if not forloop.last %}
+            <div class="liKessSeparator"></div>
+            {% endif %}
         {% endfor %}
         </ul>
     {% else %}

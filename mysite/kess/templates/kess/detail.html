@@ -3,38 +3,64 @@
 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+      xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" type="text/css" href="{% static 'kess/style.css' %}">
 
-<div class="container">
-    <h3 class="title_detail">Kess ?</h3>
+<div class="container kessDetails">
+    <h3 class="title_detail">
+        <a>
+            Kess ?
+        </a>
+        {% if user.is_authenticated %}
+            <a>
+                {% if is_fav %}
+                    <form class="inline favStar" action="#" method="get">
+                        <input id="isFavStar" type="submit" class="btn" value="✦" name="removeFav" title="Retirer des favoris">
+                    </form>
+                {% else %}
+                    <form class="inline favStar" action="#" method="get">
+                        <input id="isntFavStar" type="submit" class="btn" value="✧" name="addFav" title="Ajouter aux favoris">
+                    </form>
+                {% endif %}
+            </a>
+        {% endif %}
+    </h3>
     <h1 class="kess_img">{{ kess.emoji }}</h1>
-    <h3>{{kess_hint}}</h3>
 
     {% if user.is_authenticated %}
-
+        <h3>{{kess_hint}}</h3>
         {% if is_answer_valide %}
         <div class="detail_answer">
-            <h3>Vous avez résolu ce Kess ! La réponse est : </h3>
+            Catégorie : {{kess.category}}</br>
+            Indice de difficulté de {{kess_diff}}
+            <h3 class="kessFoundMessage">Vous avez résolu ce Kess ! La réponse est : </h3>
             <h3>"{{kess.reponse}}"</h3>
         </div>
         {% else %}
         <form action="" method="POST" class="">
             {% csrf_token %}
-            <p>Catégorie :
+            <p>
+                Catégorie :
                 {%if display_category_hint%}
                     {{kess.category}}
                 {%else%}
                     Vous aurez cet indice 5 jours aprés la publication de ce Kess
                 {%endif%}
             </p>
-            <div class="form-group">
-                <label class="col-form-label" for="answer">Entrez votre proposition: </label>
-                <input class="form-control col-lg-5" type="answer" name="answer" id="answer" required>
-            </div>
-            <div class="form-group">
-                <input class="btn btn-lg btn-dark" type="submit" value="Essayer la proposition">
-            </div>
+            <p>
+                Indice de difficulté de
+                    {{kess_diff}}
+            </p>
+            {% if kess.is_ready_to_publish %}
+                <div class="form-group">
+                    <label class="col-form-label" for="answer">Entrez votre proposition: </label>
+                    <input class="form-control col-lg-5" type="answer" name="answer" id="answer" required>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-lg btn-dark" type="submit" value="Essayer la proposition">
+                </div>
+            {% endif %}
         </form>
         {% endif %}
         <span>Réponse pour les tests : {{kess.reponse}}</span>
@@ -43,8 +69,44 @@
         <br>
         <a class="removeHyperlinkStyling" href="{% url 'login'%}?next={{request.path}}">Se connecter ?</a>
     {% endif %}
+
+    <div class="kessPopularity font20">
+        <form class="inline noMargin" action="#" method="get">
+            <input id="upvote" type="submit" class="btn font20 noPadding voteArrow" value={{ voteIcon1 }} name="upVote" title="Upvoter">
+        </form>
+        <a>{{ upPercent }}% / {{ downPercent }}%</a>
+        <form class="inline noMargin" action="#" method="get">
+            <input id="downvote" type="submit" class="btn font20 noPadding voteArrow" value={{ voteIcon2 }} name="downVote" title="Downvoter">
+        </form>
+
+        <div class="kessPopularityBars">
+            <div class="inline popularityBar" style="background-color: green; width: {{ upWidth }}px"></div>
+            <div class="inline popularityBar" style="background-color: red; width: {{ downWidth }}px"></div>
+        </div>
+    </div>
+
     <p class="detail-publication-date">
-        Kess créé par {{ kess.created_by }} et publié le :
-        {{ pubDate }}
+        Kess créé par {{ kess.created_by }} et publié le : {{ pubDate }}
     </p>
+</div>
+
+<div class="pointsReminder detailsPointsReminders">
+    <a>
+        🔔 Rappel des points pour chaque Kess trouvé :
+    </a></br>
+    <a>
+        ✅ 5 points de base
+    </a></br>
+    <a>
+        😎 5 points si trouvé sans indice (moins de 3 jours après la publication)
+    </a></br>
+    <a>
+        💃 5 points si trouvé sans indication de catégorie (moins de 5 jours après la publication)
+    </a></br>
+    <a>
+        🥈 10 points si trouvé en second
+    </a></br>
+    <a>
+        🥇 20 points si trouvé en premier
+    </a></br>
 </div>

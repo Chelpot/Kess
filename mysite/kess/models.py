@@ -25,12 +25,13 @@ class Tile(models.Model):
     avatar = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     action = models.CharField(max_length=200)
+    kessId = models.CharField(max_length=200, default='', blank=True)
     time = models.CharField(max_length=200)
 
 
 class Kess(models.Model):
-    emoji = models.CharField(max_length=200, unique=True)
-    reponse = models.CharField(max_length=200)
+    emoji = models.CharField(max_length=200, unique=True, verbose_name='Kess?')
+    reponse = models.CharField(max_length=200, verbose_name='Réponse')
     is_staff = models.BooleanField(default=False)
     is_ready_to_publish = models.BooleanField(default=False)
     published_at = models.DateTimeField('date published')
@@ -40,9 +41,12 @@ class Kess(models.Model):
         max_length=200,
         choices=[(tag.value, tag.value) for tag in CategoryChoice],
         default=CategoryChoice.DIVERS,
-        verbose_name='Categorie'
+        verbose_name='Catégorie'
     )
     foundList = models.TextField(default='', blank=True)
+    nbTries = models.IntegerField(default=None, blank=True, null=True)
+    upVotes = models.TextField(default='', blank=True)
+    downVotes = models.TextField(default='', blank=True)
 
     def __str__(self):
         return self.emoji
@@ -94,13 +98,14 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    avatar = models.CharField(max_length=32, default='🙂')
+    avatar = models.CharField(max_length=1, default='🙂')
     name = models.CharField(max_length=32, blank=False, null=False, validators=[is_ascii], unique=True)
     points = models.IntegerField(default=None, blank=True, null=True)
     creation_date = models.DateTimeField(default=datetime.datetime.now())
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=True)
+    favs = models.TextField(default=None, blank=True)
 
     objects = UserManager()
 

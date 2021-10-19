@@ -12,13 +12,17 @@ class KessAdmin(admin.ModelAdmin):
               'category',
               'is_staff',
               'is_ready_to_publish',
-              'foundList']
-    list_display = ('reponse', 'emoji', 'created_at', 'created_by', 'published_at', 'category', 'foundList')
+              'foundList',
+              'nbTries',
+              'upVotes',
+              'downVotes']
+    list_display = ('reponse', 'emoji', 'created_at', 'created_by', 'published_at', 'category',
+                    'foundList', 'nbTries', 'upVotes', 'downVotes')
 
 
 class UserAdmin(admin.ModelAdmin):
-    fields = ['email', 'name', 'avatar', 'points', 'is_superuser', 'creation_date']
-    list_display = ('email', 'name', 'avatar', 'points', 'is_superuser', 'creation_date')
+    fields = ['email', 'name', 'avatar', 'points', 'favs', 'is_superuser', 'creation_date']
+    list_display = ('email', 'name', 'avatar', 'points', 'favs', 'is_superuser', 'creation_date')
 
 
 class TileAdmin(admin.ModelAdmin):
