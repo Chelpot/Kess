@@ -140,8 +140,6 @@ def detail(request, kess_id):
     # Get kess and user objects
     kess = get_object_or_404(Kess, pk=kess_id)
 
-    print('coucou')
-
     user = request.user
 
     if kess.is_ready_to_publish or user.is_staff:
