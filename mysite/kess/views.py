@@ -165,12 +165,16 @@ def detail(request, kess_id):
         hasVoted = hasUpVoted or hasDownVoted
         canVote = not hasVoted and user.is_authenticated and answer_state
 
-        # Parse favs into list
-        favs = user.favs.split(',') if user.is_authenticated else []
+        favs = []
+        if user.favs is not None:
+            # Parse favs into list
+            favs = user.favs.split(',') if user.is_authenticated else []
         is_fav = str(kess.id) in favs
 
         # Kess difficulty
-        kess_diff = 100 if len(foundList) == 0 else '❓' if kess.nbTries == 0 else 100 - int(
+        # The db is generated in a way where by default nbtries is None, So it must be tested to avoid a crash
+        # TODO change model
+        kess_diff = 100 if len(foundList) == 0 else '❓' if kess.nbTries == 0 or kess.nbTries is None else 100 - int(
             len(foundList) / kess.nbTries * 100)
 
         isLessThan3Days = datetime.now(timezone.utc) < kess.published_at + timedelta(days=3)
