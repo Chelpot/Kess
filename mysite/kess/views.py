@@ -384,12 +384,14 @@ def user(request):
 
     if request.user.is_authenticated:
 
-        favIdList = user.favs.split(',')
-
         favs = []
-        for id in favIdList:
-            if id != '':
-                favs.append(Kess.objects.get(pk=id))
+        #Cause a crash if favs is empty. Because it's by default None, and not empty string
+        if user.favs is not None:
+            favIdList = user.favs.split(',')
+
+            for id in favIdList:
+                if id != '':
+                    favs.append(Kess.objects.get(pk=id))
 
         if request.method == 'POST':
             form = UserAvatarForm(request.POST, initial={'avatar': request.user.avatar})
@@ -425,15 +427,16 @@ def userPublic(request, user_name):
     if userFound:
 
         userP = get_object_or_404(User, name=user_name)
-
-        favIdList = userP.favs.split(',')
-
         favs = []
-        for id in favIdList:
-            if id != '':
-                favs.append(Kess.objects.get(pk=id))
 
-            context = {'favs': favs, 'userP': userP, 'userFound': userFound}
+        if userP.favs is not None:
+            favIdList = userP.favs.split(',')
+
+            for id in favIdList:
+                if id != '':
+                    favs.append(Kess.objects.get(pk=id))
+
+        context = {'favs': favs, 'userP': userP, 'userFound': userFound}
 
         return render(request, 'kess/userPublic.html', context)
     else:
