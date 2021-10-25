@@ -246,6 +246,8 @@ def detail(request, kess_id):
 
         # Answer request
         if request.method == 'POST':
+            if kess.nbTries is None:
+                kess.nbTries = 0
             kess.nbTries += 1
             if request.POST.get('answer') == kess.reponse:
                 if user.name not in foundList:
@@ -255,29 +257,31 @@ def detail(request, kess_id):
                         foundList.pop()
 
                     # Give points to the user
-                    totalPoints = 5  # Default points : 5
-                    if len(foundList) == 0:  # First to find
-                        totalPoints += 20
-                    if len(foundList) == 1:  # Second to find
-                        totalPoints += 10
-                    if isLessThan3Days:  # Less than 3 days
-                        totalPoints += 5
-                    if isLessThan5Days:  # Less than 5 days
-                        totalPoints += 5
+                    #We don't want the staff to win points and steal points from real players
+                    if not user.is_staff and not user.is_superuser:
+                        totalPoints = 5  # Default points : 5
+                        if len(foundList) == 0:  # First to find
+                            totalPoints += 20
+                        if len(foundList) == 1:  # Second to find
+                            totalPoints += 10
+                        if isLessThan3Days:  # Less than 3 days
+                            totalPoints += 5
+                        if isLessThan5Days:  # Less than 5 days
+                            totalPoints += 5
 
-                    user.points += totalPoints
-                    user.save()
+                        user.points += totalPoints
+                        user.save()
 
-                    log_user_action(request,
-                                    current_user=user,
-                                    action=f"vient de trouver le Kess {kess.emoji}",
-                                    kessId=kess.id
-                                    )
+                        log_user_action(request,
+                                        current_user=user,
+                                        action=f"vient de trouver le Kess {kess.emoji}",
+                                        kessId=kess.id
+                                        )
 
-                    # Update Kess's list of users who found it
-                    foundList.append(user.name)
-                    kess.foundList = ','.join(foundList)
-                    kess.save()
+                        # Update Kess's list of users who found it
+                        foundList.append(user.name)
+                        kess.foundList = ','.join(foundList)
+                        kess.save()
 
         context = {'kess': kess,
                    'is_answer_valide': answer_state,
