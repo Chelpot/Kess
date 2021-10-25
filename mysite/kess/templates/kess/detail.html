@@ -66,9 +66,9 @@
     {% else %}
         <span>⚠️ Vous devez être connecté pour proposer une réponse</span>
         <br>
-        <a class="removeHyperlinkStyling" href="{% url 'login'%}?next={{request.path}}">Se connecter ?</a>
+        <a class="btn btn-dark removeHyperlinkStyling" href="{% url 'login'%}?next={{request.path}}">Se connecter ?</a>
     {% endif %}
-
+    {% if user.is_authenticated %}
     <div class="kessPopularity font20">
         <form class="inline noMargin" action="#" method="get">
             <input id="upvote" type="submit" class="btn font20 noPadding voteArrow" value={{ voteIcon1 }} name="upVote" title="Upvoter">
@@ -83,6 +83,7 @@
             <div class="inline popularityBar" style="background-color: red; width: {{ downWidth }}px"></div>
         </div>
     </div>
+    {% endif %}
 
     <p class="detail-publication-date">
         Kess créé par {{ kess.created_by }} et publié le : {{ pubDate }}

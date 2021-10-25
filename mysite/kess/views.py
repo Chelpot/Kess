@@ -141,6 +141,9 @@ def detail(request, kess_id):
     kess = get_object_or_404(Kess, pk=kess_id)
 
     user = request.user
+    if not user.is_authenticated:
+        context = {'kess': kess}
+        return render(request, 'kess/detail.html', context)
 
     if kess.is_ready_to_publish or user.is_staff:
 
