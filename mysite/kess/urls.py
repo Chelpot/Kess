@@ -11,6 +11,7 @@ urlpatterns = [
     path('add_kess/', views.add_kess, name='add_kess'),
     path('<int:kess_id>/', views.detail, name='detail'),
     re_path(r"^auth/", include("kess.auth")),
+    re_path(r'^login_user/$', views.login_user, name='login_user'),
     path('signup/', views.signup, name='signup'),
     path('classement/', views.classement, name='classement'),
     path('user/', views.user, name='user'),

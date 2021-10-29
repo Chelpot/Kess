@@ -1,8 +1,10 @@
 from datetime import *
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
+from django.template import RequestContext
 from django.template.defaultfilters import register
 
 from .forms import SignUpForm, CreateKessForm, UserAvatarForm
@@ -378,6 +380,19 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'kess/signup.html', {'form': form})
+
+def login_user(request):
+    username = password = ''
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/kess/')
+    return render(request, template_name='kess/login.html')
 
 
 #  ██    ██ ███████ ███████ ██████
